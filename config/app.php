@@ -123,12 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    /*
-     Register the provider for this
-     * */
-
-    'providers' => [
-        App\Providers\AppServiceProvider::class,
-    ]
-
 ];
