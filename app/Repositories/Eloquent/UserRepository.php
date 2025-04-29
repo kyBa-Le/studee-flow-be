@@ -30,4 +30,9 @@ class UserRepository implements UserRepositoryInterface
     {
         return $user->delete();
     }
+
+    public function findByEmail(string $email): ?User
+    {
+        return User::query()->where('email', $email)->first();
+    }
 }
