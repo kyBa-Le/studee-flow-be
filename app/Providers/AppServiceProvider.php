@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\JwtMiddleware;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
