@@ -9,3 +9,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/login', function () {
+    return response()->json(['message' => 'Unauthorized request'], 401);
+})->name('login');

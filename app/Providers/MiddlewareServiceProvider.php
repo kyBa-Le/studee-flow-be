@@ -15,9 +15,6 @@ class MiddlewareServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // register the custom middleware instead of using default middleware
-        app()->make(Kernel::class)
-            ->pushMiddleware(JwtMiddleware::class);
     }
 
     /**
@@ -28,5 +25,6 @@ class MiddlewareServiceProvider extends ServiceProvider
 
         // Đăng ký alias 'role'
         Route::aliasMiddleware('role', RoleMiddleware::class);
+        Route::aliasMiddleware('jwt', JwtMiddleware::class);
     }
 }

@@ -20,7 +20,7 @@ class JwtMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+            JWTAuth::parseToken()->authenticate();
         } catch (TokenInvalidException $e) {
             return response()->json(['status' => 'Token is Invalid'], 401);
         } catch (TokenExpiredException $e) {
