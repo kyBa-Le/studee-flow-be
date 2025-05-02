@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('achievements', function (Blueprint $table) {
             $table->id();
+            $table->string('image_link')->nullable();
+            $table->string('link')->nullable();
+            $table->text('content');
             $table->unsignedBigInteger('student_id');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->string('semester');
             $table->string('title');
             $table->timestamps();
 
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            });
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('achievements');
     }
 };

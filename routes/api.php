@@ -3,6 +3,7 @@
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassroomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,6 @@ Route::get('/user/tasks', [TaskController::class, "getAllByStudentId"])
 
 Route::get('/user/achievements', [AchievementController::class, "getAllByStudentId"])
     ->middleware(['auth:api', 'role:student']);
+
+Route::get('/user/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
+->middleware(['auth:api', 'role:teacher']);
