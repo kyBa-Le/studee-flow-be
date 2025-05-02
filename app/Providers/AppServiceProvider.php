@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\JwtMiddleware;
+use App\Models\Achievement;
+use App\Repositories\Eloquent\AchievementRepository;
+use App\Repositories\Eloquent\TaskRepository;
 use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\Interfaces\AchievementRepositoryInterface;
+use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         app()->bind(UserRepositoryInterface::class, UserRepository::class);
+        app()->bind(TaskRepositoryInterface::class, TaskRepository::class);
+        app()->bind(AchievementRepositoryInterface::class, AchievementRepository::class);
     }
 
     /**
