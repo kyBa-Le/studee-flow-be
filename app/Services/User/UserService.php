@@ -32,4 +32,9 @@ class UserService
     {
         return $this->userRepository->delete($user);
     }
+
+    public function findAllUsersByRole(string $role): array
+    {
+        return $this->userRepository->findAllByRole($role);
+    }
 }

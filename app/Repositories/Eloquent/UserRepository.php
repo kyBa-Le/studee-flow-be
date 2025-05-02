@@ -35,4 +35,9 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::query()->where('email', $email)->first();
     }
+
+    public function findAllByRole(string $role): array
+    {
+        return User::query()->where('role', $role)->get()->toArray();
+    }
 }
