@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             ClassroomSeeder::class,
             UserSeeder::class,
             TeacherClassroomSeeder::class,
+            TaskSeeder::class,
+            AchievementSeeder::class,
         ]);
     }
 }

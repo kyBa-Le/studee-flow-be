@@ -17,10 +17,10 @@ Route::get('/login', function () {
     return response()->json(['message' => 'Unauthorized request'], 401);
 })->name('login');
 
-Route::get('/user/tasks', [TaskController::class, "getAllByStudentId"])
+Route::get('/user/tasks', [TaskController::class, "getAllTasksByStudentId"])
     ->middleware(['auth:api', 'role:student']);
 
-Route::get('/user/achievements', [AchievementController::class, "getAllByStudentId"])
+Route::get('/user/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
     ->middleware(['auth:api', 'role:student']);
 
 Route::get('/user/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
