@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\User\AchievementService;
+use App\Services\Achievement\AchievementService;
 use Illuminate\Http\Request;
 
 class AchievementController extends Controller

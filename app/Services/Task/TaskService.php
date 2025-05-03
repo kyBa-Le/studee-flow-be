@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\User;
+namespace App\Services\Task;
 
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 

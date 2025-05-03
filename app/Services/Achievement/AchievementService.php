@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\User;
+namespace App\Services\Achievement;
 
 use App\Repositories\Interfaces\AchievementRepositoryInterface;
 
