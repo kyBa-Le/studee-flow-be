@@ -12,8 +12,13 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function getAllTeachers() {
-        $teachers = $this->userService->findAllUsersByRole('teacher');
+    public function getAllTeachers(Request $request) {
+        $size = $request->size;
+        if ($size == null) {
+            $teachers = $this->userService->findAllUsersByRole("teacher");
+        } else {
+            $teachers = $this->userService->findAllUsersByRoleWithPagination("teacher", $size);
+        }
         return response()->json($teachers);
     }
 }
