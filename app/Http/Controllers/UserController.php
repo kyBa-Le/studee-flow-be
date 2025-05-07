@@ -16,4 +16,9 @@ class UserController extends Controller
         $teachers = $this->userService->findAllUsersByRole('teacher');
         return response()->json($teachers);
     }
+
+    public function getAllStudents() {
+        $students = $this->userService->findAllUsersByRole('student');
+        return response()->json($students);
+    }
 }
