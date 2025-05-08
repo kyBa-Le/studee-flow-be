@@ -27,3 +27,5 @@ Route::get('/user/teacher/classrooms', [ClassroomController::class, "getAllClass
 ->middleware(['auth:api', 'role:teacher']);
 
 Route::get("/teachers", [UserController::class, "getAllTeachers"])->middleware(['auth:api', 'role:admin']);
+
+Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:api", "role:admin"]);
