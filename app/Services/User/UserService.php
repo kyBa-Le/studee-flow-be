@@ -37,4 +37,9 @@ class UserService
     {
         return $this->userRepository->findAllByRole($role);
     }
+
+    public function findAllUsersByRoleWithPagination(string $role, int $size): array
+    {
+        return  $this->userRepository->findAllByRoleWithPagination($role, $size);
+    }
 }
