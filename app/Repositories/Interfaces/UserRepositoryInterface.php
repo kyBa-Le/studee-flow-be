@@ -18,4 +18,6 @@ interface UserRepositoryInterface
     public function findByEmail(string $email): ?User;
 
     public function findAllByRole(string $role): array;
+
+    public function findAllByRoleWithPagination(string $role, int $size): array;
 }

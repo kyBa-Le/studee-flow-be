@@ -26,8 +26,9 @@ Route::get('/user/achievements', [AchievementController::class, "getAllAchieveme
 Route::get('/user/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
 ->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/user-management/teachers", [UserController::class, "getAllTeachers"])->middleware(['auth:api', 'role:admin']);
+Route::get("/teachers", [UserController::class, "getAllTeachers"])->middleware(['auth:api', 'role:admin']);
 
+Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:api", "role:admin"]);
 Route::post("/admin/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
 
 Route::get("/admin/students", [UserController::class, "getAllStudents"])->middleware(['auth:api', 'role:admin']);
