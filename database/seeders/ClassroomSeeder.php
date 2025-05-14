@@ -15,5 +15,8 @@ class ClassroomSeeder extends Seeder
         Classroom::create([
             "class_name" => "PNV 26A"
         ]);
+        Classroom::create([
+            "class_name" => "PNV 26B"
+        ]);        
     }
 }

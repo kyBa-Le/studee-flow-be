@@ -4,6 +4,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:
 
 Route::post("/admin/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
 
+Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 // PUT
 
 // DELETE
