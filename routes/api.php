@@ -38,7 +38,7 @@ Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:
 
 Route::post("/admin/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
 
-Route::post('/user/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
+Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 // PUT
 
 // DELETE

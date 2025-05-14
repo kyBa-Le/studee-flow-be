@@ -6,16 +6,16 @@ use App\Repositories\Interfaces\SemesterGoalRepositoryInterface;
 
 class SemesterGoalService
 {
-    protected SemesterGoalRepositoryInterface $semesterGoalRepo;
+    protected SemesterGoalRepositoryInterface $semesterGoalRepository;
 
-    public function __construct(SemesterGoalRepositoryInterface $semesterGoalRepo)
+    public function __construct(SemesterGoalRepositoryInterface $semesterGoalRepository)
     {
-        $this->semesterGoalRepo = $semesterGoalRepo;
+        $this->semesterGoalRepository = $semesterGoalRepository;
     }
 
     public function create(array $data)
     {
-        return $this->semesterGoalRepo->create($data);
+        return $this->semesterGoalRepository->create($data);
     }
 }
 
