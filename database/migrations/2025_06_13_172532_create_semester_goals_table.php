@@ -11,12 +11,16 @@ class CreateSemesterGoalsTable extends Migration
         Schema::create('semester_goals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('semester_id');
-            $table->string('module');
-            $table->text('goals');
-            $table->boolean('is_achieved')->default(false);
+            $table->text('self_goals')->nullable();
+            $table->text('teacher_goals')->nullable();
+            $table->text('course_goals')->nullable();
+            $table->boolean('is_achieved')->nullable();
             $table->timestamps();
+
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
         });
     }
@@ -26,4 +30,3 @@ class CreateSemesterGoalsTable extends Migration
         Schema::dropIfExists('semester_goals');
     }
 }
-

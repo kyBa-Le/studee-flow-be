@@ -2,24 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SemesterGoal extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'student_id',
+        'subject_id',
         'semester_id',
-        'module',
-        'goals',
+        'self_goals',
+        'teacher_goals',
+        'course_goals',
         'is_achieved',
     ];
 
     public function student()
     {
         return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 
     public function semester()
