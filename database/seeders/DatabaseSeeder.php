@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TeacherClassroomSeeder::class,
             TaskSeeder::class,
             AchievementSeeder::class,
+            SubjectSeeder::class,
             SemesterSeeder::class,
             SemesterGoalSeeder::class,
         ]);
