@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Semester extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'started_at',
+        'ended_at',
+    ];
+
+    public function semesterGoals()
+    {
+        return $this->hasMany(SemesterGoal::class);
+    }
+}

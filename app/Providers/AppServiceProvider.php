@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 use App\Models\Achievement;
+use App\Models\SemesterGoal;
 use App\Repositories\Eloquent\AchievementRepository;
 use App\Repositories\Eloquent\ClassroomRepository;
+use App\Repositories\Eloquent\SemesterGoalRepository;
 use App\Repositories\Eloquent\TaskRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Interfaces\AchievementRepositoryInterface;
 use App\Repositories\Interfaces\ClassroomRepositoryInterface;
+use App\Repositories\Interfaces\SemesterGoalRepositoryInterface;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
         app()->bind(TaskRepositoryInterface::class, TaskRepository::class);
         app()->bind(AchievementRepositoryInterface::class, AchievementRepository::class);
         app()->bind(ClassroomRepositoryInterface::class, ClassroomRepository::class);
+        app()->bind(SemesterGoalRepositoryInterface::class, SemesterGoalRepository::class);
     }
 
     /**
