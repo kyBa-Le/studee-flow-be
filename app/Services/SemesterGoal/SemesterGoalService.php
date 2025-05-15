@@ -17,5 +17,10 @@ class SemesterGoalService
     {
         return $this->semesterGoalRepository->create($data);
     }
+
+    public function update(int $id, array $data)
+    {
+        return $this->semesterGoalRepository->update($id, $data);
+    }
 }
 
