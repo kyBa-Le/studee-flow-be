@@ -37,6 +37,8 @@ Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClass
 
 Route::get("/classroom/{id}/current-semeter", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
+Route::get("/student/semeter-goals", [SemesterGoalController::class, "getCurrentSemesterGoal"])->middleware(['auth:api', 'role:student']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 

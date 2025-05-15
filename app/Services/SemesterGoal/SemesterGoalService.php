@@ -22,5 +22,10 @@ class SemesterGoalService
     {
         return $this->semesterGoalRepository->update($id, $data);
     }
+
+    public function getCurrentSemesterGoal(int $userId, int $semesterId)
+    {
+        return $this->semesterGoalRepository->getCurrentSemesterGoal($userId, $semesterId);
+    }
 }
 

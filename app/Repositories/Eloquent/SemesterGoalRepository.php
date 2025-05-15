@@ -26,4 +26,8 @@ class SemesterGoalRepository implements SemesterGoalRepositoryInterface
 
         return $goal;
     }
+
+    public function getCurrentSemesterGoal(int $userId, int $semesterId) {
+        return SemesterGoal::where('student_id', $userId)->where('semester_id', $semesterId)->get();
+    }
 }

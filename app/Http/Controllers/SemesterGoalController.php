@@ -53,4 +53,11 @@ class SemesterGoalController extends Controller
             ], 500); 
         }
     }
+
+    public function getCurrentSemesterGoal(Request $request) {
+       $userId = $request->user()->id;
+       $semesterId = $request->get('semester_id');
+       $currentSemesterGoal = $this->semesterGoalService->getCurrentSemesterGoal( $userId, $semesterId );
+       return response()->json($currentSemesterGoal);
+    }
 }
