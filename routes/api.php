@@ -17,18 +17,18 @@ Route::get('/login', function () {
     return response()->json(['message' => 'Unauthorized request'], 401);
 })->name('login');
 
-Route::get('/user/tasks', [TaskController::class, "getAllTasksByStudentId"])
+Route::get('/student/tasks', [TaskController::class, "getAllTasksByStudentId"])
 ->middleware(['auth:api', 'role:student']);
 
-Route::get('/user/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
+Route::get('/student/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
 ->middleware(['auth:api', 'role:student']);
 
-Route::get('/user/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
+Route::get('/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
 ->middleware(['auth:api', 'role:teacher']);
 
 Route::get("/teachers", [UserController::class, "getAllTeachers"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/admin/students", [UserController::class, "getAllStudents"])->middleware(['auth:api', 'role:admin']);
+Route::get("/students", [UserController::class, "getAllStudents"])->middleware(['auth:api', 'role:admin']);
 
 Route::get("/classrooms", [ClassroomController::class, "getAllClassrooms"])->middleware(['auth:api', 'role:admin']);
 
@@ -37,7 +37,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:api", "role:admin"]);
 
-Route::post("/admin/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
+Route::post("/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
 
 // PUT
 
