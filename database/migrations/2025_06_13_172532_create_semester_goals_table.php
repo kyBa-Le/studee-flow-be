@@ -16,7 +16,7 @@ class CreateSemesterGoalsTable extends Migration
             $table->text('self_goals')->nullable();
             $table->text('teacher_goals')->nullable();
             $table->text('course_goals')->nullable();
-            $table->boolean('is_achieved')->nullable();
+            $table->boolean('is_achieved')->default(false);
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');

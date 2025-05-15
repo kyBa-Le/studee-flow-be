@@ -18,11 +18,14 @@ class SemesterGoalController extends Controller
     public function createSemesterGoal(Request $request)
     {
         try {
+            $userId = $request->user()->id;
+            $request->merge(['student_id' => $userId]);
             $newGoal = $this->semesterGoalService->create($request->all());
              return response()->json([
             'message' => 'Semester goal created successfully!',
             'data' => $newGoal
         ], 201);
+          
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to create semester goal',
@@ -42,6 +45,7 @@ class SemesterGoalController extends Controller
                 'message' => 'Semester goal updated successfully!',
                 'data' => $updatedGoal
             ], 200);
+          
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to update semester goal',
