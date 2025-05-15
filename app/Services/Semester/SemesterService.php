@@ -12,6 +12,7 @@ class SemesterService
     {
         $this->semesterRepository = $semesterRepository;
     }
+    
     public function getCurrentSemesterByClassroomId($id, $today): array
     {
         return $this->semesterRepository->getCurrentSemesterByClassroomId($id, $today);
