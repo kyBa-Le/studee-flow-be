@@ -3,7 +3,7 @@ namespace App\Services\Classroom;
 
 use App\Repositories\Interfaces\ClassroomRepositoryInterface;
 
-class ClassroomService 
+class ClassroomService
 {
     protected ClassroomRepositoryInterface $classroomRepository;
 
@@ -11,9 +11,13 @@ class ClassroomService
     {
         $this->classroomRepository= $classroomRepository;
     }
-    
-    public function getAllClassroomByTeacherId ($id) 
+
+    public function getAllClassroomByTeacherId ($id)
     {
         return $this->classroomRepository->getAllByTeacherId($id);
+    }
+
+    public function getAllClassrooms () {
+        return $this->classroomRepository->getAll();
     }
 }
