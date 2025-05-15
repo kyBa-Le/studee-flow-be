@@ -43,7 +43,7 @@ Route::post("/admin/students/bulk", [UserController::class, "createStudents"])->
 
 Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 // PUT
-
+Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
 // DELETE
 
 
