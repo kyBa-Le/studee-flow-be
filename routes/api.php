@@ -30,6 +30,8 @@ Route::get("/teachers", [UserController::class, "getAllTeachers"])->middleware([
 
 Route::get("/admin/students", [UserController::class, "getAllStudents"])->middleware(['auth:api', 'role:admin']);
 
+Route::get("/classrooms", [ClassroomController::class, "getAllClassrooms"])->middleware(['auth:api', 'role:admin']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
