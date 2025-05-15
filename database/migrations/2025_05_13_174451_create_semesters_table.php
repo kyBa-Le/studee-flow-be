@@ -13,7 +13,9 @@ class CreateSemestersTable extends Migration
             $table->string('name');
             $table->date('started_at');
             $table->date('ended_at');
-            $table->timestamps(); 
+            $table->unsignedBigInteger('classroom_id');
+            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
