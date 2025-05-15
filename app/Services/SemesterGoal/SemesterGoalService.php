@@ -23,7 +23,7 @@ class SemesterGoalService
         return $this->semesterGoalRepository->update($id, $data);
     }
 
-    public function getAllSemesterGoalsByStudentId(int $userId, int $semesterId)
+    public function getSemesterGoalsByStudentId(int $userId, int $semesterId)
     {
         return $this->semesterGoalRepository->getSemesterGoalsByStudentId($userId, $semesterId);
     }
