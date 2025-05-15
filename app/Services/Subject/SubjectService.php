@@ -3,8 +3,6 @@ namespace App\Services\Subject;
 
 use App\Models\Subject;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class SubjectService
 {
