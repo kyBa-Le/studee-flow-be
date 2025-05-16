@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Week;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,11 @@ class DatabaseSeeder extends Seeder
             TeacherClassroomSeeder::class,
             TaskSeeder::class,
             AchievementSeeder::class,
+            SubjectSeeder::class,
+            SemesterSeeder::class,
+            SemesterGoalSeeder::class,
+            WeekSeeder::class,
+            InClassSeeder::class,
         ]);
     }
 }
