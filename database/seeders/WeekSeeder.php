@@ -8,20 +8,20 @@ use App\Models\Week;
 
 class WeekSeeder extends Seeder
 {
-   
+
     public function run(): void
     {
-         Week::create([
+        Week::create([
             'classroom_id' => 1,
             'week' => 1,
-            'starte_date' => '2025-05-13',
+            'start_date' => '2025-05-13',
             'end_date' => '2025-05-19',
         ]);
 
         Week::create([
             'classroom_id' => 1,
             'week' => 2,
-            'starte_date' => '2025-05-20',
+            'start_date' => '2025-05-20',
             'end_date' => '2025-05-26',
         ]);
     }

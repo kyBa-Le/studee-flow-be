@@ -9,6 +9,7 @@ use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\WeeklyController;
 use App\Http\Controllers\InClassController;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
@@ -24,13 +25,13 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/student/tasks', [TaskController::class, "getAllTasksByStudentId"])
-->middleware(['auth:api', 'role:student']);
+    ->middleware(['auth:api', 'role:student']);
 
 Route::get('/student/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
-->middleware(['auth:api', 'role:student']);
+    ->middleware(['auth:api', 'role:student']);
 
 Route::get('/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
-->middleware(['auth:api', 'role:teacher']);
+    ->middleware(['auth:api', 'role:teacher']);
 
 Route::get("/teachers", [UserController::class, "getAllTeachers"])->middleware(['auth:api', 'role:admin']);
 
@@ -50,6 +51,8 @@ Route::get("/student/in-classes", [InClassController::class, "getInClassJournalB
 
 Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
+Route::get('/student/weekly-goals', [WeeklyController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api', 'role:student']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -58,6 +61,8 @@ Route::post("/users", [UserController::class, "createUser"])->middleware(["auth:
 Route::post("/students/bulk", [UserController::class, "createStudents"])->middleware(["auth:api", "role:admin"]);
 
 Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
+
+Route::post('/weekly-goals', [WeeklyController::class, 'createWeekly'])->middleware(['auth:api', 'role:student']);
 
 Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStudy'])->middleware(['auth:api', 'role:student']);
 
@@ -68,6 +73,7 @@ Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'upda
 
 Route::put('/student/self-studies/{id}', [SelfStudyController::class, 'updateSelfStudy'])->middleware(['auth:api', 'role:student']);
 
+Route::put('/weekly-goals/{id}', [WeeklyController::class, 'updateWeekly'])->middleware(['auth:api', 'role:student']);
+
+
 // DELETE
-
-

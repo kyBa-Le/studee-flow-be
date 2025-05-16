@@ -15,7 +15,7 @@ class InClassSeeder extends Seeder
     public function run(): void
     {
         InClass::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => Carbon::now()->toDateString(),
             'subject_id' => 1,
             'lesson' => 'Introduction to Laravel',
@@ -27,7 +27,7 @@ class InClassSeeder extends Seeder
         ]);
 
         InClass::create([
-            'user_id' => 2,
+            'student_id' => 2,
             'date' => Carbon::now()->toDateString(),
             'subject_id' => 2,
             'lesson' => 'JavaScript Loops',
