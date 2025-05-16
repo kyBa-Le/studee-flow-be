@@ -3,6 +3,7 @@
 namespace App\Services\SelfStudy;
 
 use App\Repositories\Interfaces\SelfStudyRepositoryInterface;
+use PHPUnit\Framework\Exception;
 
 class SelfStudyService
 {
@@ -14,6 +15,17 @@ class SelfStudyService
 
     public function getSelfStudyJournalByStudentIdAndWeekId(int $studentId, int $weekId) {
         return $this->selfStudyRepository->getByStudentIdAndWeekId($studentId, $weekId);
+    }
+
+    public function update($id, $newSelfStudy, $studentId)
+    {
+        $selfStudy = $this->getSelfStudyJournalByStudentIdAndWeekId($studentId, $id);
+
+        if ($selfStudy) {
+            return $this->selfStudyRepository->update($id ,$newSelfStudy);
+        } else {
+            throw new Exception("You don't have permission to update self study");
+        }
     }
 
 }

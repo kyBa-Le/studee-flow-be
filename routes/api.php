@@ -55,6 +55,9 @@ Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSe
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
+
+Route::put('/student/self-studies/{id}', [SelfStudyController::class, 'updateSelfStudy'])->middleware(['auth:api', 'role:student']);
+
 // DELETE
 
 

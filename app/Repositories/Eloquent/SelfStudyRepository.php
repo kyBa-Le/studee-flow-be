@@ -11,4 +11,10 @@ class SelfStudyRepository implements SelfStudyRepositoryInterface
     {
         return SelfStudy::all()->where('user_id', $studentId)->where('week_id', $weekId);
     }
+
+    public function update(int $id, $newSelfStudy)
+    {
+        $old = SelfStudy::where('id', $id)->first();
+        return $old->update($newSelfStudy);
+    }
 }

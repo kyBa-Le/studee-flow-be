@@ -20,4 +20,17 @@ class SelfStudyController
         return response()->json($response);
     }
 
+    public function updateSelfStudy($id)
+    {
+        $studentId = request()->user()->id;
+        $data = request()->all();
+
+        try {
+            $response = $this->selfStudyService->update($id, $data, $studentId);
+            return response()->json(["message" => "Self Study has been updated"]);
+        } catch (\Throwable $exception) {
+            return response()->json(["message" => "Failed to update self study journal"], 400);
+        }
+    }
+
 }
