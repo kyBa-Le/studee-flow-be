@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SelfStudyController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
@@ -40,6 +41,8 @@ Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClass
 Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/student/semester-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api', 'role:student']);
+
+Route::get("/student/self-studies", [SelfStudyController::class, "getWeeklySelfStudyJournalOfStudent"])->middleware(['auth:api', 'role:student']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);

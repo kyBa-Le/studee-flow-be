@@ -25,7 +25,7 @@ class SelfStudySeeder extends Seeder
             'evaluation' => 'Good understanding',
             'reinforcing_learning' => 'Repeat exercises next week',
             'notes' => 'Need to improve speed',
-            'journal_id' => 1,
+            'week_id' => 1,
         ]);
 
         SelfStudy::create([
@@ -41,7 +41,7 @@ class SelfStudySeeder extends Seeder
             'evaluation' => 'Partial understanding',
             'reinforcing_learning' => 'Discuss with peers',
             'notes' => 'Confused by circuits',
-            'journal_id' => 1,
+            'week_id' => 1,
         ]);
 
         SelfStudy::create([
@@ -57,7 +57,7 @@ class SelfStudySeeder extends Seeder
             'evaluation' => 'Excellent focus',
             'reinforcing_learning' => 'Create timeline poster',
             'notes' => 'Loved this topic',
-            'journal_id' => 1,
+            'week_id' => 1,
         ]);
     }
 }
