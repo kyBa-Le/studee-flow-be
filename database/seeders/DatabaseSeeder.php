@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SemesterGoalSeeder::class,
             WeekSeeder::class,
             InClassSeeder::class,
+            SelfStudySeeder::class
         ]);
     }
 }
