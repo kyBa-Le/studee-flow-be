@@ -9,6 +9,7 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\InClassController;
+use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::get("/classroom/{id}/current-semeter", [SemesterController::class, "getCu
 Route::get("/student/semeter-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api', 'role:student']);
 
 Route::get("/student/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api', 'role:student']);
+
+Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
