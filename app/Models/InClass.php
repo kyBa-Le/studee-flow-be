@@ -12,7 +12,7 @@ class InClass extends Model
     protected $table = 'in_class';
 
     protected $fillable = [
-        'user_id',
+        'student_id',
         'date',
         'subject_id',
         'lesson',

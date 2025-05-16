@@ -13,7 +13,7 @@ return new class extends Migration
         $table->id();
         $table->unsignedBigInteger('classroom_id');
         $table->integer('week');
-        $table->date('starte_date');
+        $table->date('started_date');
         $table->date('end_date');
         $table->timestamps();
 
