@@ -17,17 +17,38 @@ class InClassController extends Controller
     public function createInClassJournal(Request $request)
     {
         try {
-            $userId = $request->user()->id;
-            $request->merge(['user_id' => $userId]);
+            $student_id = $request->user()->id;
+            $request->merge(['student_id' => $student_id]);
+            
             $newInClass = $this->inClassService->create($request->all());
-             return response()->json([
-            'message' => 'In class journal created successfully!',
-            'data' => $newInClass
-        ], 201);
+            return response()->json([
+                'message' => 'In class journal created successfully!',
+                'data' => $newInClass
+            ], 201);
           
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to create in class journal',
+                'message' => $e->getMessage(),
+            ], 500); 
+        }
+    }
+
+    public function updateInClassJournal(Request $request, $id)
+    {
+        try {
+            $student_id = $request->user()->id;
+            $request->merge(['student_id' => $student_id]);
+            
+            $updatedInClassJournal = $this->inClassService->update($id, $request->all());
+            return response()->json([
+                'message' => 'In class journal updated successfully!',
+                'data' => $updatedInClassJournal
+            ], 200);
+          
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to update in class journal',
                 'message' => $e->getMessage(),
             ], 500); 
         }

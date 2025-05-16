@@ -9,6 +9,7 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\InClassController;
+use App\Models\InClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,9 @@ Route::post('/student/in-classes', [InClassController::class, 'createInClassJour
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
+
+Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClassJournal'])->middleware(['auth:api', 'role:student']);
+
 // DELETE
 
 

@@ -10,7 +10,7 @@ return new class extends Migration
     {
          Schema::create('in_class', function (Blueprint $table) {
             $table->id(); 
-            $table->unsignedBigInteger('user_id'); 
+            $table->unsignedBigInteger('student_id'); 
             $table->date('date');
             $table->unsignedBigInteger('subject_id'); 
             $table->text('lesson');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_problem_solved')->default(false);
             $table->timestamps();
             $table->unsignedBigInteger('week_id')->nullable(); 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('week_id')->references('id')->on('weeks')->onDelete('set null');
         });

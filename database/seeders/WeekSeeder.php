@@ -14,14 +14,14 @@ class WeekSeeder extends Seeder
          Week::create([
             'classroom_id' => 1,
             'week' => 1,
-            'starte_date' => '2025-05-13',
+            'started_date' => '2025-05-13',
             'end_date' => '2025-05-19',
         ]);
 
         Week::create([
             'classroom_id' => 1,
             'week' => 2,
-            'starte_date' => '2025-05-20',
+            'started_date' => '2025-05-20',
             'end_date' => '2025-05-26',
         ]);
     }
