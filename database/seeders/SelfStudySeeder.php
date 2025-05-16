@@ -13,7 +13,7 @@ class SelfStudySeeder extends Seeder
     public function run(): void
     {
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-13',
             'subject_id' => 1,
             'lesson' => 'Math basics',
@@ -29,7 +29,7 @@ class SelfStudySeeder extends Seeder
         ]);
 
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-14',
             'subject_id' => 2,
             'lesson' => 'Science: Electricity',
@@ -45,7 +45,7 @@ class SelfStudySeeder extends Seeder
         ]);
 
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-15',
             'subject_id' => 3,
             'lesson' => 'History: WWII',

@@ -12,7 +12,7 @@ class SelfStudy extends Model
     protected $table = 'self_study';
 
     protected $fillable = [
-        'user_id',
+        'student_id',
         'date',
         'subject_id',
         'lesson',

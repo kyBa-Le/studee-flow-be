@@ -33,4 +33,18 @@ class SelfStudyController
         }
     }
 
+    public function createSelfStudy()
+    {
+        $studentId = request()->user()->id;
+        $data = request()->all();
+
+        try {
+            $this->selfStudyService->create($data, $studentId);
+            return response()->json(["message" => "Self Study has been created"], 201);
+        } catch (\Throwable $exception) {
+            return response()->json(["message" => "Failed to create self study journal"], 400);
+        }
+    }
+
+
 }

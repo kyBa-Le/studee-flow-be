@@ -17,4 +17,10 @@ class SelfStudyRepository implements SelfStudyRepositoryInterface
         $old = SelfStudy::where('id', $id)->first();
         return $old->update($newSelfStudy);
     }
+
+    public function create(array $selfStudyData)
+    {
+        return SelfStudy::create($selfStudyData);
+    }
+
 }
