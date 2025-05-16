@@ -12,7 +12,7 @@ class Week extends Model
     protected $fillable = [
         'classroom_id',
         'week',
-        'started_date',
+        'start_date',
         'end_date'
     ];
 
