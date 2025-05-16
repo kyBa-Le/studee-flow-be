@@ -8,6 +8,8 @@ use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\InClassController;
+use App\Models\InClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,8 @@ Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getC
 
 Route::get("/student/semester-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api', 'role:student']);
 
+Route::get("/student/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api', 'role:student']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -50,8 +54,13 @@ Route::post("/students/bulk", [UserController::class, "createStudents"])->middle
 
 Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 
+Route::post('/student/in-classes', [InClassController::class, 'createInClassJournal'])->middleware(['auth:api', 'role:student']);
+
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
+
+Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClassJournal'])->middleware(['auth:api', 'role:student']);
+
 // DELETE
 
 
