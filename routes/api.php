@@ -53,6 +53,9 @@ Route::post("/students/bulk", [UserController::class, "createStudents"])->middle
 
 Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 
+Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStudy'])->middleware(['auth:api', 'role:student']);
+
+
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
 

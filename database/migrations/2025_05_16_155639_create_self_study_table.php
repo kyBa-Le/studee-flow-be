@@ -13,7 +13,7 @@ class CreateSelfStudyTable extends Migration
         Schema::create('self_study', function (Blueprint $table) {
             $table->id(); // Primary key
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->unsignedBigInteger('week_id')->nullable();
 
@@ -30,7 +30,7 @@ class CreateSelfStudyTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('set null');
             $table->foreign('week_id')->references('id')->on('weeks')->onDelete('set null');
         });

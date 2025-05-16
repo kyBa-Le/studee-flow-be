@@ -28,4 +28,10 @@ class SelfStudyService
         }
     }
 
+    public function create($selfStudyData, $studentId)
+    {
+        $selfStudyData['student_id'] = $studentId;
+        return $this->selfStudyRepository->create($selfStudyData);
+    }
+
 }

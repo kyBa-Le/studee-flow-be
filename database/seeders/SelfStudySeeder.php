@@ -13,14 +13,14 @@ class SelfStudySeeder extends Seeder
     public function run(): void
     {
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-13',
             'subject_id' => 1,
             'lesson' => 'Math basics',
             'time_allocation' => 60,
             'learning_resources' => 'Book A, YouTube video',
             'learning_activities' => 'Read chapters, solve problems',
-            'concentration' => 4,
+            'concentration' => 2,
             'is_follow_plan' => true,
             'evaluation' => 'Good understanding',
             'reinforcing_learning' => 'Repeat exercises next week',
@@ -29,7 +29,7 @@ class SelfStudySeeder extends Seeder
         ]);
 
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-14',
             'subject_id' => 2,
             'lesson' => 'Science: Electricity',
@@ -45,14 +45,14 @@ class SelfStudySeeder extends Seeder
         ]);
 
         SelfStudy::create([
-            'user_id' => 1,
+            'student_id' => 1,
             'date' => '2025-05-15',
             'subject_id' => 3,
             'lesson' => 'History: WWII',
             'time_allocation' => 50,
             'learning_resources' => 'Documentary, Timeline PDF',
             'learning_activities' => 'Watched and annotated',
-            'concentration' => 5,
+            'concentration' => 2,
             'is_follow_plan' => true,
             'evaluation' => 'Excellent focus',
             'reinforcing_learning' => 'Create timeline poster',

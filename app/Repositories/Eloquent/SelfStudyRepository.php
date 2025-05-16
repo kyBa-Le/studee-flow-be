@@ -9,7 +9,7 @@ class SelfStudyRepository implements SelfStudyRepositoryInterface
 {
     public function getByStudentIdAndWeekId(int $studentId, int $weekId)
     {
-        return SelfStudy::all()->where('user_id', $studentId)->where('week_id', $weekId);
+        return SelfStudy::where('student_id', $studentId)->where('week_id', $weekId);
     }
 
     public function update(int $id, $newSelfStudy)
@@ -17,4 +17,10 @@ class SelfStudyRepository implements SelfStudyRepositoryInterface
         $old = SelfStudy::where('id', $id)->first();
         return $old->update($newSelfStudy);
     }
+
+    public function create(array $selfStudyData)
+    {
+        return SelfStudy::create($selfStudyData);
+    }
+
 }

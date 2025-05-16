@@ -12,7 +12,7 @@ class SelfStudy extends Model
     protected $table = 'self_study';
 
     protected $fillable = [
-        'user_id',
+        'student_id',
         'date',
         'subject_id',
         'lesson',
@@ -31,7 +31,7 @@ class SelfStudy extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'student_id');
     }
 
     public function subject()
