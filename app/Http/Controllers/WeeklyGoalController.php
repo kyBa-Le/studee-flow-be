@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateWeeklyRequest;
 use App\Services\WeeklyGoal\WeeklyGoalService;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Throw_;
+use Throwable;
 
 class WeeklyController extends Controller
 {
@@ -32,8 +34,14 @@ class WeeklyController extends Controller
 
     public function updateWeekly(Request $request, int $id)
     {
-        $data = $request->only(['goal', 'is_achieved']);
-        $updated = $this->service->update($id, $data);
-        return response()->json($updated, 200);
+        try {
+            $studentId = $request->user()->id;
+
+            $data = $request->only(['goal', 'is_achieved']);
+            $updated = $this->service->update($id, $data, $studentId);
+            return response()->json($updated, 200);
+        } catch (Throwable $e) {
+            Throw $e;
+        }
     }
 }
