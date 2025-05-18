@@ -19,7 +19,7 @@ class WeeklyGoalRepository implements WeeklyGoalRepositoryInterface
     public function update($id, $data)
     {
         $weekly = WeeklyGoal::findOrFail($id);
-        $weekly->update($data->toArray());
+        $weekly->update();
         return $weekly;
     }
 
