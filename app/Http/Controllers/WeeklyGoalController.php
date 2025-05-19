@@ -37,8 +37,7 @@ class WeeklyGoalController extends Controller
         try {
             $studentId = $request->user()->id;
 
-            $data = $request->only(['goal', 'is_achieved']);
-            $updated = $this->service->update($id, $data, $studentId);
+            $updated = $this->service->update($id, $request->toArray(), $studentId);
             return response()->json($updated, 200);
         } catch (Throwable $e) {
             Throw $e;

@@ -8,7 +8,7 @@ interface WeeklyGoalRepositoryInterface
 {
     public function create(array $data);
 
-    public function update($id, $data);
+    public function update($weeklyGoal, $newData);
 
     public function getByStudentIdAndWeekId($userId, $weekId);
 
