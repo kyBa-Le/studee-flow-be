@@ -8,5 +8,5 @@ interface InClassRepositoryInterface
 
     public function update(int $id, array $data);
 
-    public function getByStudentIdAndWeekId(int $userId, int $weekId);
+    public function getByStudentIdAndWeekId(int $studentId, int $weekId);
 }

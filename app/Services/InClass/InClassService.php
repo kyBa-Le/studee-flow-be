@@ -23,9 +23,9 @@ class InClassService
         return $this->inClassRepository->update($id, $data);
     }
 
-    public function getInClassJournalByStudentId(int $userId, int $weekId)
+    public function getInClassJournalByStudentId(int $studentId, int $weekId)
     {
-        return $this->inClassRepository->getByStudentIdAndWeekId($userId, $weekId);
+        return $this->inClassRepository->getByStudentIdAndWeekId($studentId, $weekId);
     }
 }
 

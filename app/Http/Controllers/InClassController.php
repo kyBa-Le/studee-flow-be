@@ -19,18 +19,18 @@ class InClassController extends Controller
         try {
             $student_id = $request->user()->id;
             $request->merge(['student_id' => $student_id]);
-            
+
             $newInClass = $this->inClassService->create($request->all());
             return response()->json([
                 'message' => 'In class journal created successfully!',
                 'data' => $newInClass
             ], 201);
-          
+
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to create in class journal',
                 'message' => $e->getMessage(),
-            ], 500); 
+            ], 500);
         }
     }
 
@@ -39,26 +39,26 @@ class InClassController extends Controller
         try {
             $student_id = $request->user()->id;
             $request->merge(['student_id' => $student_id]);
-            
+
             $updatedInClassJournal = $this->inClassService->update($id, $request->all());
             return response()->json([
                 'message' => 'In class journal updated successfully!',
                 'data' => $updatedInClassJournal
             ], 200);
-          
+
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to update in class journal',
                 'message' => $e->getMessage(),
-            ], 500); 
+            ], 500);
         }
     }
 
     public function getInClassJournalByStudentId(Request $request) {
-       $userId = $request->user()->id;
+       $studentId = $request->user()->id;
        $weekId = $request->get('week_id');
 
-       $currentInClass = $this->inClassService->getInClassJournalByStudentId( $userId, $weekId );
+       $currentInClass = $this->inClassService->getInClassJournalByStudentId( $studentId, $weekId );
        return response()->json($currentInClass);
     }
 }

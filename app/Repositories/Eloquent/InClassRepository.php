@@ -27,7 +27,7 @@ class InClassRepository implements InClassRepositoryInterface
         return $inClass;
     }
 
-    public function getByStudentIdAndWeekId(int $userId, int $weekId) {
-        return InClass::where('user_id', $userId)->where('week_id', $weekId)->get();
+    public function getByStudentIdAndWeekId(int $studentId, int $weekId) {
+        return InClass::where('student_id', $studentId)->where('week_id', $weekId)->get();
     }
 }
