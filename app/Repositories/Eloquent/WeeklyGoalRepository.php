@@ -16,10 +16,15 @@ class WeeklyGoalRepository implements WeeklyGoalRepositoryInterface
         return WeeklyGoal::where('student_id', $userId)->where('week_id', $weekId)->get()->toArray();
     }
 
-    public function update($id, array $data)
+    public function update($id, $data)
     {
         $weekly = WeeklyGoal::findOrFail($id);
-        $weekly->update($data);
+        $weekly->update();
         return $weekly;
+    }
+
+    public function findById($id)
+    {
+        return WeeklyGoal::find($id);
     }
 }

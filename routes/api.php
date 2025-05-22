@@ -9,7 +9,7 @@ use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\WeeklyController;
+use App\Http\Controllers\WeeklyGoalController;
 use App\Http\Controllers\InClassController;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
@@ -51,7 +51,7 @@ Route::get("/student/in-classes", [InClassController::class, "getInClassJournalB
 
 Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
-Route::get('/student/weekly-goals', [WeeklyController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api', 'role:student']);
+Route::get('/student/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api', 'role:student']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
@@ -62,7 +62,7 @@ Route::post("/students/bulk", [UserController::class, "createStudents"])->middle
 
 Route::post('/student/semester-goals', [SemesterGoalController::class, 'createSemesterGoal'])->middleware(['auth:api', 'role:student']);
 
-Route::post('/weekly-goals', [WeeklyController::class, 'createWeekly'])->middleware(['auth:api', 'role:student']);
+Route::post('/weekly-goals', [WeeklyGoalController::class, 'createWeeklyGoal'])->middleware(['auth:api', 'role:student']);
 
 Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStudy'])->middleware(['auth:api', 'role:student']);
 
@@ -73,7 +73,7 @@ Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'upda
 
 Route::put('/student/self-studies/{id}', [SelfStudyController::class, 'updateSelfStudy'])->middleware(['auth:api', 'role:student']);
 
-Route::put('/weekly-goals/{id}', [WeeklyController::class, 'updateWeekly'])->middleware(['auth:api', 'role:student']);
+Route::put('/weekly-goals/{id}', [WeeklyGoalController::class, 'updateWeeklyGoal'])->middleware(['auth:api', 'role:student']);
 
 
 // DELETE
