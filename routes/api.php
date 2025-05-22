@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WeeklyGoalController;
 use App\Http\Controllers\InClassController;
+use App\Http\Controllers\StudentProgressController;
 use App\Models\InClass;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
@@ -53,6 +54,10 @@ Route::get("/student/in-classes", [InClassController::class, "getInClassJournalB
 Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
 Route::get('/student/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api', 'role:student']);
+
+Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsByClassroomId'])->middleware(['auth:api', 'role:teacher']);
+
+Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStudentProgressByStudentId'])->middleware(['auth:api', 'role:teacher']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
