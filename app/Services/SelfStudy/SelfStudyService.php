@@ -19,9 +19,9 @@ class SelfStudyService
 
     public function update($id, $newSelfStudy, $studentId)
     {
-        $selfStudy = $this->getSelfStudyJournalByStudentIdAndWeekId($studentId, $id);
+        $selfStudy = $this->selfStudyRepository->getById($id);
 
-        if ($selfStudy) {
+        if ($selfStudy && $selfStudy->student_id = $studentId) {
             return $this->selfStudyRepository->update($id ,$newSelfStudy);
         } else {
             throw new Exception("You don't have permission to update self study");

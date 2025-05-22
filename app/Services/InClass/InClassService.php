@@ -2,6 +2,7 @@
 
 namespace App\Services\InClass;
 
+use App\Models\SelfStudy;
 use App\Repositories\Interfaces\InClassRepositoryInterface;
 
 class InClassService
@@ -18,14 +19,21 @@ class InClassService
         return $this->inClassRepository->create($data);
     }
 
-     public function update(int $id, array $data)
+    public function update($id, $newInClass, $studentId)
     {
-        return $this->inClassRepository->update($id, $data);
+        $inClass = $this->inClassRepository->getById($id);
+
+        if ($inClass && $inClass->student_id = $studentId) {
+            return $this->inClassRepository->update($id, $newInClass);
+        } else {
+            throw new \Exception("You don't have permission to update in class");
+        }
     }
+
 
     public function getInClassJournalByStudentId(int $studentId, int $weekId)
     {
         return $this->inClassRepository->getByStudentIdAndWeekId($studentId, $weekId);
     }
-}
 
+}

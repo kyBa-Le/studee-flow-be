@@ -23,4 +23,9 @@ class SelfStudyRepository implements SelfStudyRepositoryInterface
         return SelfStudy::create($selfStudyData);
     }
 
+    public function getById(int $id)
+    {
+        return SelfStudy::query()->findOrFail($id);
+    }
+
 }
