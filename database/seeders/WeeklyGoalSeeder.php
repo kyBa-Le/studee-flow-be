@@ -19,11 +19,11 @@ class WeeklyGoalSeeder extends Seeder
             'goal' => 'thành bài tập tuần này',
             'is_achieved' => false,
         ]);
-        
+
         WeeklyGoal::create([
             'student_id' => 1,
             'week_id' => 1,
-            'goal' => 'thành bài tập tuần này',
+            'goal' => 'This is the weekly goal number 2',
             'is_achieved' => false,
         ]);
     }

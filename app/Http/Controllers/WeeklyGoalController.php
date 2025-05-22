@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateWeeklyRequest;
 use App\Services\WeeklyGoal\WeeklyGoalService;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Throw_;
 use Throwable;
 
 class WeeklyGoalController extends Controller

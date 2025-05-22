@@ -17,7 +17,7 @@ class SelfStudySeeder extends Seeder
             'date' => '2025-05-13',
             'subject_id' => 1,
             'lesson' => 'Math basics',
-            'time_allocation' => 60,
+            'time_allocation' => "60 minutes",
             'learning_resources' => 'Book A, YouTube video',
             'learning_activities' => 'Read chapters, solve problems',
             'concentration' => 2,

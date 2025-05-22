@@ -2,7 +2,6 @@
 
 namespace App\Services\InClass;
 
-use App\Models\SelfStudy;
 use App\Repositories\Interfaces\InClassRepositoryInterface;
 
 class InClassService
@@ -23,7 +22,7 @@ class InClassService
     {
         $inClass = $this->inClassRepository->getById($id);
 
-        if ($inClass && $inClass->student_id = $studentId) {
+        if ($inClass && $inClass->student_id == $studentId) {
             return $this->inClassRepository->update($id, $newInClass);
         } else {
             throw new \Exception("You don't have permission to update in class");

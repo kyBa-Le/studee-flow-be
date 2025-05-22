@@ -21,7 +21,7 @@ class SelfStudyService
     {
         $selfStudy = $this->selfStudyRepository->getById($id);
 
-        if ($selfStudy && $selfStudy->student_id = $studentId) {
+        if ($selfStudy && $selfStudy->student_id == $studentId) {
             return $this->selfStudyRepository->update($id ,$newSelfStudy);
         } else {
             throw new Exception("You don't have permission to update self study");
