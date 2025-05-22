@@ -66,4 +66,13 @@ class UserService
             return false;
         }
     }
+    public function findUserById(int $id): ?User
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    public function getAllStudentsByClassroomId($classroom_id): array
+    {
+        return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);
+    }
 }

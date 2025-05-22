@@ -24,6 +24,7 @@ class User extends Authenticatable implements JWTSubject
 
     protected $fillable = [
         'full_name',
+        'avatar_link',
         'email',
         'password',
         'role',
@@ -70,5 +71,10 @@ class User extends Authenticatable implements JWTSubject
     public function classrooms()
     {
         return $this->belongsToMany(Classroom::class, 'teachers_classrooms', 'teacher_id', 'classroom_id');
+    }
+
+    public function studentProgress()
+    {
+        return $this->hasOne(StudentProgress::class, 'student_id');
     }
 }
