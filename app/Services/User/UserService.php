@@ -66,4 +66,8 @@ class UserService
             return false;
         }
     }
+    public function findUserById(int $id): ?User
+    {
+        return $this->userRepository->findById($id);
+    }
 }
