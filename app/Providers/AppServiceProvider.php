@@ -13,6 +13,7 @@ use App\Repositories\Eloquent\TaskRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\SubjectRepository;
 use App\Repositories\Eloquent\SemesterRepository;
+use App\Repositories\Eloquent\StudentProgressRepository;
 use App\Repositories\Interfaces\AchievementRepositoryInterface;
 use App\Repositories\Interfaces\ClassroomRepositoryInterface;
 use App\Repositories\Interfaces\InClassRepositoryInterface;
@@ -21,6 +22,7 @@ use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Repositories\Interfaces\SemesterRepositoryInterface;
+use App\Repositories\Interfaces\StudentProgressRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         app()->bind(SemesterGoalRepositoryInterface::class, SemesterGoalRepository::class);
         app()->bind(SemesterRepositoryInterface::class, SemesterRepository::class);
         app()->bind(InClassRepositoryInterface::class, InClassRepository::class);
+        app()->bind(StudentProgressRepositoryInterface::class, StudentProgressRepository::class);
     }
 
     /**
