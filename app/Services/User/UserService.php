@@ -66,4 +66,9 @@ class UserService
             return false;
         }
     }
+
+    public function getAllStudentsByClassroomId($classroom_id): array
+    {
+        return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);
+    }
 }

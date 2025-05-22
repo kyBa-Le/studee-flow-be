@@ -48,4 +48,9 @@ class UserController extends Controller
         $students = $this->userService->findAllUsersByRole('student');
         return response()->json($students);
     }
+
+     public function getAllStudentsByClassroomId($classroom_id) {
+        $students = $this->userService-> getAllStudentsByClassroomId($classroom_id);
+        return response()->json($students);
+    }
 }

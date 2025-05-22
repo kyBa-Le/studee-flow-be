@@ -45,6 +45,8 @@ Route::get("/student/semester-goals", [SemesterGoalController::class, "getSemest
 
 Route::get("/student/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api', 'role:student']);
 
+Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsByClassroomId'])->middleware(['auth:api', 'role:teacher']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
