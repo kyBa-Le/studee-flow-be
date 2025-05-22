@@ -17,7 +17,7 @@ class CreateSelfStudyTable extends Migration
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->unsignedBigInteger('week_id')->nullable();
 
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->text('lesson')->nullable();
             $table->string('time_allocation')->nullable(); // in minutes, perhaps
             $table->text('learning_resources')->nullable();

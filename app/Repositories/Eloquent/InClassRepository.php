@@ -12,22 +12,18 @@ class InClassRepository implements InClassRepositoryInterface
         return InClass::create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, $newInClass)
     {
-        $inClass = InClass::where('id', $id)
-            ->where('student_id', $data['student_id'])
-            ->first();
-
-        if (! $inClass) {
-            throw new \Exception('In class Journal not found or does not belong to the student');
-        }
-
-         $inClass->update($data);
-
-        return $inClass;
+        $old = InClass::where('id', $id)->first();
+        return $old->update($newInClass);
     }
 
-    public function getByStudentIdAndWeekId(int $userId, int $weekId) {
-        return InClass::where('user_id', $userId)->where('week_id', $weekId)->get();
+
+    public function getByStudentIdAndWeekId(int $studentId, int $weekId) {
+        return InClass::where('student_id', $studentId)->where('week_id', $weekId)->get();
+    }
+
+    public function getById(int $id) {
+        return InClass::query()->findOrFail($id);
     }
 }

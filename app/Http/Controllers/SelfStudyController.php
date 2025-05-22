@@ -24,6 +24,7 @@ class SelfStudyController
     {
         $studentId = request()->user()->id;
         $data = request()->all();
+        $data['student_id'] = $studentId;
 
         try {
             $response = $this->selfStudyService->update($id, $data, $studentId);
@@ -39,10 +40,14 @@ class SelfStudyController
         $data = request()->all();
 
         try {
-            $this->selfStudyService->create($data, $studentId);
-            return response()->json(["message" => "Self Study has been created"], 201);
+            $response = $this->selfStudyService->create($data, $studentId);
+            return response()->json([
+                "message" => "Self Study has been created",
+                "selfStudyId" => $response->id
+            ], 201);
         } catch (\Throwable $exception) {
-            return response()->json(["message" => "Failed to create self study journal"], 400);
+            throw $exception;
+//            return response()->json(["message" => "Failed to create self study journal"], 400);
         }
     }
 

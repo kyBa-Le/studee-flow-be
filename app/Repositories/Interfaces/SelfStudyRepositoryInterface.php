@@ -10,4 +10,6 @@ interface SelfStudyRepositoryInterface
 
     public function create(array $selfStudyData);
 
+    public function getById(int $id);
+
 }

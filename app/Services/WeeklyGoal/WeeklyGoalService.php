@@ -3,8 +3,7 @@ namespace App\Services\WeeklyGoal;
 
 use App\Models\WeeklyGoal;
 use App\Repositories\Interfaces\WeeklyGoalRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Exception;
 
 class WeeklyGoalService
 {
@@ -30,8 +29,12 @@ class WeeklyGoalService
         return $this->weeklyGoalRepository->getByStudentIdAndWeekId($studentId, $weekId);
     }
 
-    public function update($id, array $data)
+    public function update($id, array $newWeeklyGoal, $studentId)
     {
-        return $this->weeklyGoalRepository->update($id, $data);
+        $weeklyGoal = $this->weeklyGoalRepository->findById($id);
+        if (!$weeklyGoal || $weeklyGoal->student_id != $studentId) {
+            throw new Exception("Weekly goal not found");
+        }
+        return $this->weeklyGoalRepository->update($weeklyGoal, $newWeeklyGoal);
     }
 }
