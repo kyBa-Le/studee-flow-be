@@ -77,4 +77,10 @@ Route::put('/student/self-studies/{id}', [SelfStudyController::class, 'updateSel
 Route::put('/weekly-goals/{id}', [WeeklyGoalController::class, 'updateWeeklyGoal'])->middleware(['auth:api', 'role:student']);
 
 
+Route::put("/student/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
+
+Route::put('/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
+
 // DELETE
+Route::delete("/user/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
+
