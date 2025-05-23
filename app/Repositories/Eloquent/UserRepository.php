@@ -38,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function findAllByRole(string $role): array
     {
-        return User::query()->where('role', $role)->get()->toArray();
+        return User::with("classroom")->where('role', $role)->get()->toArray();
     }
 
     public function findAllByRoleWithPagination(string $role, int $size): array

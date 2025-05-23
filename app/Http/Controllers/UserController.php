@@ -63,6 +63,8 @@ class UserController extends Controller
         $data = $request->only(['email', 'full_name', 'password', 'student_classroom_id', 'gender']);
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
         }
         $updated = $this->userService->updateUser($user, $data);
         if (!$updated) {
