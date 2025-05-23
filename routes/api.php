@@ -41,7 +41,7 @@ Route::get("/students", [UserController::class, "getAllStudents"])->middleware([
 
 Route::get("/classrooms", [ClassroomController::class, "getAllClassrooms"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student']);
+Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student,admin']);
 
 Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
@@ -58,6 +58,8 @@ Route::get('/student/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoal
 Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsByClassroomId'])->middleware(['auth:api', 'role:teacher']);
 
 Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStudentProgressByStudentId'])->middleware(['auth:api', 'role:teacher']);
+
+Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
