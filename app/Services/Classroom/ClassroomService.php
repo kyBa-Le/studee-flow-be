@@ -20,4 +20,23 @@ class ClassroomService
     public function getAllClassrooms () {
         return $this->classroomRepository->getAll();
     }
+
+     public function createClassroom($className)
+    {
+        return $this->classroomRepository->create([
+            'class_name' => $className
+        ]);
+    }
+
+    public function updateClassroom($id, $newClassName)
+    {
+        return $this->classroomRepository->update($id, [
+            'class_name' => $newClassName
+        ]);
+    }
+
+    public function deleteClassroom($id)
+    {
+        return $this->classroomRepository->delete($id);
+    }
 }
