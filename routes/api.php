@@ -61,6 +61,8 @@ Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStud
 
 Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
+Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api', 'role:admin']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
