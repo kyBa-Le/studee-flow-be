@@ -20,4 +20,10 @@ class AchievementController extends Controller
         $achievements = $this->achievementService->getAllAchievementsByStudentId($userId);
         return response()->json($achievements);
     }
+
+        public function getAchievementsByStudentId(Request $request, $id)
+    {
+        $achievements = $this->achievementService->getAllAchievementsByStudentId($id);
+        return response()->json($achievements);
+    }
 }

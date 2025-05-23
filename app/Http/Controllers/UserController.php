@@ -99,4 +99,13 @@ class UserController extends Controller
         }
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    public function getStudentById($id)
+    {
+       $user = $this->userService->findUserById($id);
+       if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        return response()->json($user);
+    }
 }
