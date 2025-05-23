@@ -54,6 +54,11 @@ class UserController extends Controller
         return response()->json($students);
     }
 
+     public function getAllStudentsByClassroomId($classroom_id) {
+        $students = $this->userService-> getAllStudentsByClassroomId($classroom_id);
+        return response()->json($students);
+    }
+
     public function updateStudentByAdmin(Request $request, $id)
     {
         $user = $this->userService->findUserById($id);

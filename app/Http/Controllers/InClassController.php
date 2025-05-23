@@ -19,46 +19,45 @@ class InClassController extends Controller
         try {
             $student_id = $request->user()->id;
             $request->merge(['student_id' => $student_id]);
-            
+
             $newInClass = $this->inClassService->create($request->all());
             return response()->json([
                 'message' => 'In class journal created successfully!',
-                'data' => $newInClass
+                'inClassId' => $newInClass->id
             ], 201);
-          
+
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to create in class journal',
                 'message' => $e->getMessage(),
-            ], 500); 
+            ], 500);
         }
     }
 
-    public function updateInClassJournal(Request $request, $id)
+    public function updateInClass($id)
     {
+        $studentId = request()->user()->id;
+        $data = request()->all();
+        $data['student_id'] = $studentId;
+
         try {
-            $student_id = $request->user()->id;
-            $request->merge(['student_id' => $student_id]);
-            
-            $updatedInClassJournal = $this->inClassService->update($id, $request->all());
-            return response()->json([
-                'message' => 'In class journal updated successfully!',
-                'data' => $updatedInClassJournal
-            ], 200);
-          
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Failed to update in class journal',
-                'message' => $e->getMessage(),
-            ], 500); 
+            $response = $this->inClassService->update($id, $data, $studentId);
+            return response()->json(["message" => "In Class has been updated"]);
+        } catch (\Throwable $exception) {
+            return response()->json(["message" => "Failed to update in class journal"], 400);
         }
     }
+
 
     public function getInClassJournalByStudentId(Request $request) {
-       $userId = $request->user()->id;
-       $weekId = $request->get('week_id');
+       try {
+           $studentId = $request->user()->id;
+           $weekId = $request->get('week_id');
 
-       $currentInClass = $this->inClassService->getInClassJournalByStudentId( $userId, $weekId );
-       return response()->json($currentInClass);
+           $currentInClass = $this->inClassService->getInClassJournalByStudentId( $studentId, $weekId );
+           return response()->json($currentInClass);
+       } catch (\Throwable $exception) {
+           throw $exception;
+       }
     }
 }

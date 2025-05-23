@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Week extends Model
 {
-     use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
-        'classroom_id', 
-        'week', 
-        'starte_date', 
+        'classroom_id',
+        'week',
+        'start_date',
         'end_date'
     ];
 

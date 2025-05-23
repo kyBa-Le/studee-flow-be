@@ -20,4 +20,6 @@ interface UserRepositoryInterface
     public function findAllByRole(string $role): array;
 
     public function findAllByRoleWithPagination(string $role, int $size): array;
+
+    public function getAllStudentsByClassroomId(int $classroom_id): array;
 }

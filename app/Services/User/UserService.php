@@ -113,4 +113,9 @@ class UserService
             'code' => 200,
         ];
     }
+  
+    public function getAllStudentsByClassroomId($classroom_id): array
+    {
+        return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);
+    }
 }
