@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\User;
 
 use App\Models\User;
@@ -45,7 +46,8 @@ class UserService
         return  $this->userRepository->findAllByRoleWithPagination($role, $size);
     }
 
-    public function createStudents($emails, $password, $classroom_id) {
+    public function createStudents($emails, $password, $classroom_id)
+    {
         $hashedPassword = Hash::make($password);
 
         DB::beginTransaction();
@@ -71,6 +73,47 @@ class UserService
         return $this->userRepository->findById($id);
     }
 
+    public function updateOwnProfile(User $user, array $data): array
+    {
+        $allowedFields = ['full_name', 'gender', 'avatar_link', 'current_password', 'new_password', 'confirm_new_password'];
+        $filteredData = array_intersect_key($data, array_flip($allowedFields));
+        if (
+            !empty($filteredData['current_password']) ||
+            !empty($filteredData['new_password']) ||
+            !empty($filteredData['confirm_new_password'])
+        ) {
+            if (!Hash::check($filteredData['current_password'] ?? '', $user->password)) {
+                return [
+                    'status' => false,
+                    'message' => 'Current password is incorrect',
+                    'code' => 403,
+                ];
+            }
+            if (($filteredData['new_password'] ?? '') !== ($filteredData['confirm_new_password'] ?? '')) {
+                return [
+                    'status' => false,
+                    'message' => 'New password confirmation does not match',
+                    'code' => 400,
+                ];
+            }
+            $filteredData['password'] = Hash::make($filteredData['new_password']);
+        }
+        unset($filteredData['current_password'], $filteredData['new_password'], $filteredData['confirm_new_password']);
+        $updated = $this->userRepository->update($user, $filteredData);
+        if (!$updated) {
+            return [
+                'status' => false,
+                'message' => 'Update failed',
+                'code' => 400,
+            ];
+        }
+        return [
+            'status' => true,
+            'message' => 'Update successful',
+            'code' => 200,
+        ];
+    }
+  
     public function getAllStudentsByClassroomId($classroom_id): array
     {
         return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);

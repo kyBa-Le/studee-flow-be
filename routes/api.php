@@ -87,6 +87,7 @@ Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->m
 
 Route::put('/student/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
 
+
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
 
