@@ -61,10 +61,10 @@ Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'upda
 
 Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClassJournal'])->middleware(['auth:api', 'role:student']);
 
-Route::put("/student/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
+Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
 
-Route::put('/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
+Route::put('/profile', [UserController::class, 'updateOwnProfile'])->middleware('auth:api','role:student');
 
 // DELETE
-Route::delete("/user/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
+Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
 
