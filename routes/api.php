@@ -41,7 +41,7 @@ Route::get("/students", [UserController::class, "getAllStudents"])->middleware([
 
 Route::get("/classrooms", [ClassroomController::class, "getAllClassrooms"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student,admin']);
+Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student,teacher' ]);
 
 Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
@@ -88,6 +88,7 @@ Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClass
 Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
 
 Route::put('/student/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
+
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);

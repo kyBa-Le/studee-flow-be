@@ -68,6 +68,8 @@ class UserController extends Controller
         $data = $request->only(['email', 'full_name', 'password', 'student_classroom_id', 'gender']);
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
         }
         $updated = $this->userService->updateUser($user, $data);
         if (!$updated) {
@@ -76,23 +78,13 @@ class UserController extends Controller
         return response()->json(['message' => 'User updated successfully']);
     }
 
-    public function studentUpdateProfile(Request $request)
+    public function updateOwnProfile(Request $request)
     {
         $user = $request->user();
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-        $data = $request->only(['full_name', 'password', 'gender']);
-        if (!empty($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
-        }
-        $updated = $this->userService->updateUser($user, $data);
-        if (!$updated) {
-            return response()->json(['message' => 'Update failed'], 400);
-        }
-        return response()->json(['message' => 'Profile updated successfully']);
+
+        $result = $this->userService->updateOwnProfile($user, $request->all());
+
+        return response()->json(['message' => $result['message']], $result['code']);
     }
 
     public function deleteUser($id)
