@@ -38,7 +38,7 @@ Route::get("/students", [UserController::class, "getAllStudents"])->middleware([
 
 Route::get("/classrooms", [ClassroomController::class, "getAllClassrooms"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student']);
+Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClassroomId"])->middleware(['auth:api', 'role:student,teacher' ]);
 
 Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
