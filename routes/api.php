@@ -82,7 +82,7 @@ Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStu
 
 Route::post('/student/in-classes', [InClassController::class, 'createInClassJournal'])->middleware(['auth:api', 'role:student']);
 
-Route::post("/classrooms/{id}", [ClassroomController::class, "createClassroom"])->middleware(['auth:api', 'role:admin']);
+Route::post("/classrooms", [ClassroomController::class, "createClassroom"])->middleware(['auth:api', 'role:admin']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
