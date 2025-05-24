@@ -82,6 +82,8 @@ Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStu
 
 Route::post('/student/in-classes', [InClassController::class, 'createInClassJournal'])->middleware(['auth:api', 'role:student']);
 
+Route::post("/classrooms/{id}", [ClassroomController::class, "createClassroom"])->middleware(['auth:api', 'role:admin']);
+
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
 
@@ -95,7 +97,9 @@ Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->m
 
 Route::put('/student/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
 
+Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
+Route::delete("/classrooms/{id}", [ClassroomController::class, "deleteClassroom"])->middleware(['auth:api', 'role:admin']);
 
