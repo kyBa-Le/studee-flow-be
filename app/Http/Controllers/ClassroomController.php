@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Classroom\ClassroomCreatingUseCase;
+use App\Services\Classroom\CreateClassroomUseCase;
 use App\Services\Classroom\ClassroomService;
-use App\Services\Classroom\ClassroomUpdatingUseCase;
+use App\Services\Classroom\UpdateClassroomUseCase;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
     protected $classroomService;
-    protected ClassroomCreatingUseCase $classroomCreating;
-    protected ClassroomUpdatingUseCase $classroomUpdating;
+    protected CreateClassroomUseCase $createClassroomUseCase;
+    protected UpdateClassroomUseCase $updateClassroomUseCase;
 
-    public function __construct(ClassroomService $classroomService, ClassroomCreatingUseCase $classroomCreating, ClassroomUpdatingUseCase $classroomUpdating)
+    public function __construct(ClassroomService $classroomService,
+                                CreateClassroomUseCase $createClassroomUseCase,
+                                UpdateClassroomUseCase $updateClassroomUseCase)
     {
-        $this->classroomCreating = $classroomCreating;
+        $this->createClassroomUseCase = $createClassroomUseCase;
         $this->classroomService = $classroomService;
-        $this->classroomUpdating = $classroomUpdating;
+        $this->updateClassroomUseCase = $updateClassroomUseCase;
     }
 
     public function getAllClassroomByTeacherId(Request $request)
@@ -34,24 +36,21 @@ class ClassroomController extends Controller
 
     public function createClassroom(Request $request)
     {
-        $className["class_name"] = $request->class_name;
+        $classroom = $request->classroom;
         $semesters = $request->semesters;
-        $this->classroomCreating->execute( $className, $semesters);
+        $this->createClassroomUseCase->execute( $classroom, $semesters);
         return response()->json(["message" => "Create class successful"]);
     }
 
     public function updateClassroom($id, Request $request)
     {
-        $classroomData = [
-            'id' => $id,
-            'class_name' => $request->class_name
-        ];
-        
+        $classroomData = $request->classroom;
+        $classroomData['id'] = $id;
         $semesters = $request->semesters ?? [];
-        $this->classroomUpdating->execute($classroomData, $semesters);
+        $this->updateClassroomUseCase->execute($classroomData, $semesters);
         return response()->json(["message" => "Update classroom successful"]);
     }
-  
+
     public function getTeachersByClassroomId($classroom_id) {
         $users = $this->classroomService->getTeachersByClassroomId($classroom_id);
         return response()->json($users);

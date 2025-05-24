@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\ClassroomRepositoryInterface;
 use App\Repositories\Interfaces\SemesterRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
-class ClassroomCreatingUseCase
+class UpdateClassroomUseCase
 {
     protected ClassroomRepositoryInterface $classroomRepository;
     protected SemesterRepositoryInterface $semesterRepository;
@@ -17,17 +17,29 @@ class ClassroomCreatingUseCase
         $this->semesterRepository = $semesterRepository;
     }
 
-    public function execute($className, $semesters)
+    public function execute(array $classroomData, array $semestersData)
     {
         DB::beginTransaction();
         try {
-            $classroom = $this->classroomRepository->create($className);
-            foreach ($semesters as $semester) {
-                $semester["classroom_id"] = $classroom->id;
-                $this->semesterRepository->create($semester);
+            $classroom = $this->classroomRepository->update(
+                $classroomData['id'],
+                ['class_name' => $classroomData['class_name']]
+            );
+
+            foreach ($semestersData as $semester) {
+
+                if (isset($semester['id'])) {
+                    $this->semesterRepository->update($semester['id'], $semester);
+                } else {
+                    $semester["classroom_id"] = $classroomData['id'];
+                    $this->semesterRepository->create($semester);
+                }
             }
+
             DB::commit();
-            } catch (\Exception $e) {
+            return $classroom;
+
+        } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
