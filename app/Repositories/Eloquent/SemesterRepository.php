@@ -14,10 +14,14 @@ class SemesterRepository implements SemesterRepositoryInterface
             ->toArray();
     }
 
-    
     public function create(array $data)
     {
         return Semester::create($data);
     }
-
+    
+    public function update(int $id, array $data) {
+        $semester = Semester::findOrFail($id);
+        $semester->update($data);
+        return $semester;
+    }
 }

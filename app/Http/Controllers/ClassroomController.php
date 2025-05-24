@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Services\Classroom\ClassroomCreatingUseCase;
 use App\Services\Classroom\ClassroomService;
+use App\Services\Classroom\ClassroomUpdatingUseCase;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
     protected $classroomService;
     protected ClassroomCreatingUseCase $classroomCreating;
+    protected ClassroomUpdatingUseCase $classroomUpdating;
 
-    public function __construct(ClassroomService $classroomService, ClassroomCreatingUseCase $classroomCreating)
+    public function __construct(ClassroomService $classroomService, ClassroomCreatingUseCase $classroomCreating, ClassroomUpdatingUseCase $classroomUpdating)
     {
         $this->classroomCreating = $classroomCreating;
         $this->classroomService = $classroomService;
+        $this->classroomUpdating = $classroomUpdating;
     }
 
     public function getAllClassroomByTeacherId(Request $request)
@@ -33,39 +36,19 @@ class ClassroomController extends Controller
     {
         $className["class_name"] = $request->class_name;
         $semesters = $request->semesters;
-        $response = $this->classroomCreating->execute( $className, $semesters);
-        return response()->json(["message" => "Create class sucessful"]);
+        $this->classroomCreating->execute( $className, $semesters);
+        return response()->json(["message" => "Create class successful"]);
     }
 
-    public function updateClassroom(Request $request)
+    public function updateClassroom($id, Request $request)
     {
-        try {
-            $classroomId = $request->input('id');
-            $newClassName = $request->input('class_name'); 
-            
-            $result = $this->classroomService->updateClassroom($classroomId, $newClassName);
-            
-            if ($result) {
-                return response()->json(["message" => "Classroom updated successfully"]);
-            }
-            return response()->json(["message" => "Classroom not found"], 404);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to update classroom"], 400);
-        }
-    }
-
-    public function deleteClassroom(Request $request)
-    {
-        try {
-            $classroomId = $request->input('id');
-            $result = $this->classroomService->deleteClassroom($classroomId);
-            
-            if ($result) {
-                return response()->json(["message" => "Classroom deleted successfully"]);
-            }
-            return response()->json(["message" => "Classroom not found"], 404);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to delete classroom"], 400);
-        }
+        $classroomData = [
+            'id' => $id,
+            'class_name' => $request->class_name
+        ];
+        
+        $semesters = $request->semesters ?? [];
+        $this->classroomUpdating->execute($classroomData, $semesters);
+        return response()->json(["message" => "Update classroom successful"]);
     }
 }
