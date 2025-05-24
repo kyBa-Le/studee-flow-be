@@ -4,4 +4,10 @@ namespace App\Repositories\Interfaces;
 interface SemesterRepositoryInterface
 {
     public function getCurrentSemesterByClassroomId($id, $today): array;
+
+    public function create(array $data);
+
+    public function update(int $id, array $data);
+    
+    public function getSemestersByClassroomId($id): array;
 }
