@@ -11,5 +11,4 @@ interface ClassroomRepositoryInterface
 
     public function update(int $id, $newClassroom);
 
-     public function delete(int $id);
 }

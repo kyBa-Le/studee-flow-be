@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Classroom\ClassroomCreatingUseCase;
 use App\Services\Classroom\ClassroomService;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
     protected $classroomService;
+    protected ClassroomCreatingUseCase $classroomCreating;
 
-    public function __construct(ClassroomService $classroomService)
+    public function __construct(ClassroomService $classroomService, ClassroomCreatingUseCase $classroomCreating)
     {
+        $this->classroomCreating = $classroomCreating;
         $this->classroomService = $classroomService;
     }
 
@@ -28,14 +31,10 @@ class ClassroomController extends Controller
 
     public function createClassroom(Request $request)
     {
-        try {
-            $className = $request->input('class_name');
-            $result = $this->classroomService->createClassroom($className);
-            
-            return response()->json(["message" => "Classroom created successfully", "data" => $result]);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to create classroom: " . $e->getMessage()], 400);
-        }
+        $className["class_name"] = $request->class_name;
+        $semesters = $request->semesters;
+        $response = $this->classroomCreating->execute( $className, $semesters);
+        return response()->json(["message" => "Create class sucessful"]);
     }
 
     public function updateClassroom(Request $request)

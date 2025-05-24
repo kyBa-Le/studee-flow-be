@@ -13,4 +13,11 @@ class SemesterRepository implements SemesterRepositoryInterface
             ->get()
             ->toArray();
     }
+
+    
+    public function create(array $data)
+    {
+        return Semester::create($data);
+    }
+
 }
