@@ -49,47 +49,8 @@ class ClassroomController extends Controller
         $semesters = $request->semesters ?? [];
         $this->updateClassroomUseCase->execute($classroomData, $semesters);
         return response()->json(["message" => "Update classroom successful"]);
-        try {
-            $className = $request->input('class_name');
-            $result = $this->classroomService->createClassroom($className);
-
-            return response()->json(["message" => "Classroom created successfully", "data" => $result]);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to create classroom: " . $e->getMessage()], 400);
-        }
     }
 
-    public function updateClassroom(Request $request)
-    {
-        try {
-            $classroomId = $request->input('id');
-            $newClassName = $request->input('class_name');
-
-            $result = $this->classroomService->updateClassroom($classroomId, $newClassName);
-
-            if ($result) {
-                return response()->json(["message" => "Classroom updated successfully"]);
-            }
-            return response()->json(["message" => "Classroom not found"], 404);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to update classroom"], 400);
-        }
-    }
-
-    public function deleteClassroom(Request $request)
-    {
-        try {
-            $classroomId = $request->input('id');
-            $result = $this->classroomService->deleteClassroom($classroomId);
-
-            if ($result) {
-                return response()->json(["message" => "Classroom deleted successfully"]);
-            }
-            return response()->json(["message" => "Classroom not found"], 404);
-        } catch (\Exception $e) {
-            return response()->json(["message" => "Failed to delete classroom"], 400);
-        }
-    }
 
     public function getTeachersByClassroomId($classroom_id) {
         $users = $this->classroomService->getTeachersByClassroomId($classroom_id);

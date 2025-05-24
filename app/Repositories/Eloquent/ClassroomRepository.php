@@ -38,18 +38,4 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         return $classroom->teachers->toArray();
     }
 
-      public function create(array $data)
-    {
-        return Classroom::create($data);
-    }
-
-    public function update(int $id, $newClassroom)
-    {
-        $old = Classroom::where('id', $id)->first();
-        return $old->update($newClassroom);
-    }
-
-    public function delete(int $id) {
-        return Classroom::where('id', $id)->delete();
-    }
 }
