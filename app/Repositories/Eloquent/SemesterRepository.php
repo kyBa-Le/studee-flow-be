@@ -13,4 +13,9 @@ class SemesterRepository implements SemesterRepositoryInterface
             ->get()
             ->toArray();
     }
+
+    public function getSemestersByClassroomId($classroomId): array
+    {
+        return Semester::where('classroom_id', $classroomId)->orderBy('started_at', 'asc')->get()->toArray();
+    }
 }

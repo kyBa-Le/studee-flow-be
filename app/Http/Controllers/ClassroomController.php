@@ -25,4 +25,9 @@ class ClassroomController extends Controller
         $classrooms = $this->classroomService->getAllClassrooms();
         return response()->json($classrooms);
     }
+
+    public function getTeachersByClassroomId($classroom_id) {
+        $users = $this->classroomService->getTeachersByClassroomId($classroom_id);
+        return response()->json($users);
+    }
 }

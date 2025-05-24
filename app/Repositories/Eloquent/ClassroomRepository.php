@@ -16,4 +16,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface
     public function getAll() {
         return Classroom::all();
     }
+
+    public function findAllByClassroomId($classroom_id): array
+    {
+        $classroom = Classroom::find($classroom_id);
+        return $classroom->teachers->toArray();
+    }
 }

@@ -20,4 +20,9 @@ class ClassroomService
     public function getAllClassrooms () {
         return $this->classroomRepository->getAll();
     }
+
+    public function getTeachersByClassroomId($classroom_id)
+    {
+        return $this->classroomRepository->findAllByClassroomId($classroom_id);
+    }
 }
