@@ -11,4 +11,7 @@ interface ClassroomRepositoryInterface
 
     public function update(int $id, $newClassroom);
 
+    public function getAll();
+
+    public function findAllByClassroomId($classroom_id);
 }

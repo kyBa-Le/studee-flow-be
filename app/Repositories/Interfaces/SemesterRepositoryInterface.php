@@ -9,4 +9,5 @@ interface SemesterRepositoryInterface
 
     public function update(int $id, array $data);
     
+    public function getSemestersByClassroomId($id): array;
 }

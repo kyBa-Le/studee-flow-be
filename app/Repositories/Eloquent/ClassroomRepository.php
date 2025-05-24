@@ -31,4 +31,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface
     public function delete(int $id) {
         return Classroom::where('id', $id)->delete();
     }
+
+    public function findAllByClassroomId($classroom_id): array
+    {
+        $classroom = Classroom::find($classroom_id);
+        return $classroom->teachers->toArray();
+    }
 }

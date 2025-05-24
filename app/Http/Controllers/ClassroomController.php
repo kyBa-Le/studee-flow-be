@@ -51,4 +51,9 @@ class ClassroomController extends Controller
         $this->classroomUpdating->execute($classroomData, $semesters);
         return response()->json(["message" => "Update classroom successful"]);
     }
+  
+    public function getTeachersByClassroomId($classroom_id) {
+        $users = $this->classroomService->getTeachersByClassroomId($classroom_id);
+        return response()->json($users);
+    }
 }

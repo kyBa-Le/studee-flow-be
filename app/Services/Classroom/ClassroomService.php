@@ -39,4 +39,9 @@ class ClassroomService
     {
         return $this->classroomRepository->delete($id);
     }
+
+    public function getTeachersByClassroomId($classroom_id)
+    {
+        return $this->classroomRepository->findAllByClassroomId($classroom_id);
+    }
 }

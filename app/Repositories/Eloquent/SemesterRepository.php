@@ -3,6 +3,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Semester;
 use App\Repositories\Interfaces\SemesterRepositoryInterface;
+
 class SemesterRepository implements SemesterRepositoryInterface
 {
     public function getCurrentSemesterByClassroomId($id, $today): array
@@ -23,5 +24,10 @@ class SemesterRepository implements SemesterRepositoryInterface
         $semester = Semester::findOrFail($id);
         $semester->update($data);
         return $semester;
+    }
+  
+    public function getSemestersByClassroomId($classroomId): array
+    {
+        return Semester::where('classroom_id', $classroomId)->orderBy('started_at', 'asc')->get()->toArray();
     }
 }
