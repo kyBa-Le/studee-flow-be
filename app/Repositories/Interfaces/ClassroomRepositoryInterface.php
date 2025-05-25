@@ -17,4 +17,6 @@ interface ClassroomRepositoryInterface
 
     public function findByTeacherIdAndClassroomId($id, $teacherId);
 
+    public function deleteTeacher(string $id, String $teacherId);
+
 }

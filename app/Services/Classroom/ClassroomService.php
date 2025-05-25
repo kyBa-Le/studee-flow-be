@@ -35,4 +35,9 @@ class ClassroomService
         abort(400, "Teacher already in this classroom");
     }
 
+    public function deleteTeacher(String $id, String $teacherId)
+    {
+        return $this->classroomRepository->deleteTeacher($id, $teacherId);
+    }
+
 }

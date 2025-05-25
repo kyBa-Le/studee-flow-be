@@ -52,4 +52,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         return $classroom->teachers->contains($teacherId);
     }
 
+    public function deleteTeacher(string $id, String $teacherId)
+    {
+        $classroom = Classroom::findOrFail($id);
+        $classroom->teachers()->detach($teacherId);
+    }
+
 }
