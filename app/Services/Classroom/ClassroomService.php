@@ -26,4 +26,8 @@ class ClassroomService
         return $this->classroomRepository->findAllByClassroomId($classroom_id);
     }
 
+    public function getClassroomByClassroomId($id)
+    {
+        return $this->classroomRepository->getClassroomByClassroomId($id);
+    }
 }
