@@ -1,8 +1,6 @@
 <?php
 namespace App\Repositories\Interfaces;
 
-use App\Models\Classroom;
-
 interface ClassroomRepositoryInterface
 {
     public function getAllByTeacherId($id): array;
@@ -15,9 +13,4 @@ interface ClassroomRepositoryInterface
 
     public function findAllByClassroomId($classroom_id);
 
-    public function create(array $data);
-
-    public function update(int $id, $newClassroom);
-
-     public function delete(int $id);
 }

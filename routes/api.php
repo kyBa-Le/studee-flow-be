@@ -31,7 +31,7 @@ Route::get('/student/tasks', [TaskController::class, "getAllTasksByStudentId"])
 
 Route::get('/student/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
     ->middleware(['auth:api', 'role:student']);
-    
+
 Route::get('/student/{id}/achievements', [AchievementController::class, "getAchievementsByStudentId"])->middleware(['auth:api', 'role:teacher']);
 
 Route::get("/students/{id}", [UserController::class, "getStudentbyId"])->middleware(['auth:api', 'role:teacher']);
@@ -101,5 +101,3 @@ Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])-
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
-Route::delete("/classrooms/{id}", [ClassroomController::class, "deleteClassroom"])->middleware(['auth:api', 'role:admin']);
-
