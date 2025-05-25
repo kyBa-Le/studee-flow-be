@@ -13,4 +13,8 @@ interface ClassroomRepositoryInterface
 
     public function findAllByClassroomId($classroom_id);
 
+    public function addTeacher(String $id, String  $teacherId);
+
+    public function findByTeacherIdAndClassroomId($id, $teacherId);
+
 }

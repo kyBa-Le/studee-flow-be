@@ -26,4 +26,13 @@ class ClassroomService
         return $this->classroomRepository->findAllByClassroomId($classroom_id);
     }
 
+    public function addTeacher(String $id, String  $teacherId)
+    {
+        $classroom = $this->classroomRepository->findByTeacherIdAndClassroomId($id, $teacherId);
+        if (!$classroom) {
+            return $this->classroomRepository->addTeacher($id, $teacherId);
+        }
+        abort(400, "Teacher already in this classroom");
+    }
+
 }
