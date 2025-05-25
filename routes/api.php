@@ -67,6 +67,8 @@ Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "g
 
 Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
+Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
+
 // POST
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -83,6 +85,8 @@ Route::post('/student/self-studies', [SelfStudyController::class, 'createSelfStu
 Route::post('/student/in-classes', [InClassController::class, 'createInClassJournal'])->middleware(['auth:api', 'role:student']);
 
 Route::post("/classrooms", [ClassroomController::class, "createClassroom"])->middleware(['auth:api', 'role:admin']);
+
+Route::post("/classrooms/{id}/add-teacher", [ClassroomController::class, "addTeacherToClassroom"])->middleware(['auth:api', 'role:admin']);
 
 Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
@@ -103,3 +107,5 @@ Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])-
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
+
+Route::delete("/classrooms/{id}/teachers/{teacher_id}", [ClassroomController::class, "deleteTeacherFromClassroom"])->middleware(['auth:api', 'role:admin']);

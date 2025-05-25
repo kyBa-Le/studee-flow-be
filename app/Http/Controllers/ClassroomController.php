@@ -56,6 +56,16 @@ class ClassroomController extends Controller
         return response()->json($users);
     }
 
+    public function addTeacherToClassroom(String $id, Request $request) {
+        $this->classroomService->addTeacher($id, $request->teacher_id);
+        return response()->json(["message" => "Add teacher successful"]);
+    }
+
+    public function deleteTeacherFromClassroom(String $id, String $teacher_id) {
+        $this->classroomService->deleteTeacher($id, $teacher_id);
+        return response()->json(["message" => "Delete teacher successful"]);
+    }
+  
     public function getClassroomByClassroomId($id)
     {
         $classroom = $this->classroomService->getClassroomByClassroomId($id);
