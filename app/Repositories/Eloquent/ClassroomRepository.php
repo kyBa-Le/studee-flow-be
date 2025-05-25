@@ -38,4 +38,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         return $classroom->teachers->toArray();
     }
 
+    public function getClassroomByClassroomId($id)
+    {
+        return Classroom::find($id);
+    }
+
+
 }

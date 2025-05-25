@@ -13,4 +13,5 @@ interface ClassroomRepositoryInterface
 
     public function findAllByClassroomId($classroom_id);
 
+    public function getClassroomByClassroomId(int $id);
 }
