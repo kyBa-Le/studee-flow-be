@@ -57,5 +57,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         $classroom = Classroom::findOrFail($id);
         $classroom->teachers()->detach($teacherId);
     }
+  
+    public function getClassroomByClassroomId($id)
+    {
+        return Classroom::find($id);
+    }
 
 }

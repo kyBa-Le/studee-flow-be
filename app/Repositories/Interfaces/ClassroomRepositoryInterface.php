@@ -19,4 +19,6 @@ interface ClassroomRepositoryInterface
 
     public function deleteTeacher(string $id, String $teacherId);
 
+    public function getClassroomByClassroomId(int $id);
+  
 }
