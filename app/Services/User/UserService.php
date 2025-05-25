@@ -97,8 +97,9 @@ class UserService
                 ];
             }
             $filteredData['password'] = Hash::make($filteredData['new_password']);
+        } else {
+            unset($filteredData['current_password'], $filteredData['new_password'], $filteredData['confirm_new_password']);
         }
-        unset($filteredData['current_password'], $filteredData['new_password'], $filteredData['confirm_new_password']);
         $updated = $this->userRepository->update($user, $filteredData);
         if (!$updated) {
             return [
@@ -113,7 +114,7 @@ class UserService
             'code' => 200,
         ];
     }
-  
+
     public function getAllStudentsByClassroomId($classroom_id): array
     {
         return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);
