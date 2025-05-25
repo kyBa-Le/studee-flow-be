@@ -113,9 +113,14 @@ class UserService
             'code' => 200,
         ];
     }
-  
+
     public function getAllStudentsByClassroomId($classroom_id): array
     {
         return  $this->userRepository->getAllStudentsByClassroomId($classroom_id);
+    }
+
+    public function findTeachersByEmail(mixed $email)
+    {
+        return $this->userRepository->findByRoleAndEmail("teacher", $email);
     }
 }
