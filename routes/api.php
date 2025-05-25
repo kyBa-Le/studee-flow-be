@@ -34,7 +34,7 @@ Route::get('/student/achievements', [AchievementController::class, "getAllAchiev
     
 Route::get('/student/{id}/achievements', [AchievementController::class, "getAchievementsByStudentId"])->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/students/{id}", [UserController::class, "getStudentbyId"])->middleware(['auth:api', 'role:teacher']);
+Route::get("/students/{id}/profile", [UserController::class, "getStudentbyId"])->middleware(['auth:api', 'role:teacher']);
 
 Route::get('/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
     ->middleware(['auth:api', 'role:teacher']);
