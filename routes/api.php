@@ -51,7 +51,7 @@ Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getC
 
 Route::get("/students/{id}/semester-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api']);
 
-Route::get("/student/self-studies", [SelfStudyController::class, "getWeeklySelfStudyJournalOfStudent"])->middleware(['auth:api', 'role:student']);
+Route::get("/students/{id}/self-studies", [SelfStudyController::class, "getWeeklySelfStudyJournalOfStudent"])->middleware(['auth:api']);
 
 Route::get("/students/{id}/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api']);
 
