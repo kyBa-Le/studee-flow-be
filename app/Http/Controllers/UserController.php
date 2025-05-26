@@ -78,7 +78,7 @@ class UserController extends Controller
         return response()->json(['message' => 'User updated successfully']);
     }
 
-    public function updateOwnProfile(Request $request)
+    public function studentUpdateProfile(Request $request)
     {
         $user = $request->user();
 
@@ -107,5 +107,12 @@ class UserController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
         return response()->json($user);
+    }
+
+    public function searchTeachers(Request $request)
+    {
+        $email = $request->email;
+        $teachers = $this->userService->findTeachersByEmail($email);
+        return response()->json(["teachers" => $teachers]);
     }
 }

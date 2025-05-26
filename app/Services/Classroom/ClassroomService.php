@@ -20,4 +20,28 @@ class ClassroomService
     public function getAllClassrooms () {
         return $this->classroomRepository->getAll();
     }
+
+    public function getTeachersByClassroomId($classroom_id)
+    {
+        return $this->classroomRepository->findAllByClassroomId($classroom_id);
+    }
+
+    public function addTeacher(String $id, String  $teacherId)
+    {
+        $classroom = $this->classroomRepository->findByTeacherIdAndClassroomId($id, $teacherId);
+        if (!$classroom) {
+            return $this->classroomRepository->addTeacher($id, $teacherId);
+        }
+        abort(400, "Teacher already in this classroom");
+    }
+
+    public function deleteTeacher(String $id, String $teacherId)
+    {
+        return $this->classroomRepository->deleteTeacher($id, $teacherId);
+    }
+
+    public function getClassroomByClassroomId($id)
+    {
+        return $this->classroomRepository->getClassroomByClassroomId($id);
+    }
 }
