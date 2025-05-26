@@ -57,7 +57,7 @@ Route::get("/students/{id}/in-classes", [InClassController::class, "getInClassJo
 
 Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
-Route::get('/student/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api', 'role:student']);
+Route::get('/students/{id}/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api']);
 
 Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsByClassroomId'])->middleware(['auth:api', 'role:teacher']);
 
