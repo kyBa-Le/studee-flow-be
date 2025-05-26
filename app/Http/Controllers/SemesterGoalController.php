@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Http\Requests\RequestGetStudentActivity;
 use App\Services\SemesterGoal\SemesterGoalService;
 use Illuminate\Http\Request;
 
@@ -54,19 +55,8 @@ class SemesterGoalController extends Controller
         }
     }
 
-    public function getSemesterGoalsByStudentId($id, Request $request)
+    public function getSemesterGoalsByStudentId($id, RequestGetStudentActivity $request)
     {
-        $user = $request->user();
-
-        if (
-            $user->id !== (int) $id &&
-            !in_array($user->role, [UserRole::Teacher, UserRole::Admin])
-        ) {
-            return response()->json([
-                "message" => "You don't have permission to access this page"
-            ], 403);
-        }
-
         $semesterId = $request->get('semester_id');
         $goals = $this->semesterGoalService->getSemesterGoalsByStudentId($id, $semesterId);
 
