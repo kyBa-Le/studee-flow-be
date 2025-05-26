@@ -34,7 +34,7 @@ Route::get('/student/achievements', [AchievementController::class, "getAllAchiev
 
 Route::get('/student/{id}/achievements', [AchievementController::class, "getAchievementsByStudentId"])->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/students/{id}/profile", [UserController::class, "getStudentbyId"])->middleware(['auth:api', 'role:teacher']);
+Route::get("/students/{id}", [UserController::class, "getStudentById"])->middleware(['auth:api', 'role:teacher,admin']);
 
 Route::get('/teacher/classrooms', [ClassroomController::class, "getAllClassroomByTeacherId"])
     ->middleware(['auth:api', 'role:teacher']);
@@ -49,7 +49,7 @@ Route::get("/classroom/{id}/subjects", [SubjectController::class, "getAllByClass
 
 Route::get("/classroom/{id}/current-semester", [SemesterController::class, "getCurrentSemesterByClassroomId"])->middleware(['auth:api']);
 
-Route::get("/student/semester-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api', 'role:student']);
+Route::get("/students/{id}/semester-goals", [SemesterGoalController::class, "getSemesterGoalsByStudentId"])->middleware(['auth:api']);
 
 Route::get("/student/self-studies", [SelfStudyController::class, "getWeeklySelfStudyJournalOfStudent"])->middleware(['auth:api', 'role:student']);
 
