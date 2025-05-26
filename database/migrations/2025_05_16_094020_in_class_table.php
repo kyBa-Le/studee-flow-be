@@ -11,7 +11,7 @@ return new class extends Migration
          Schema::create('in_class', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->unsignedBigInteger('subject_id');
             $table->text('lesson')->nullable();
             $table->enum('self_assessment', [1, 2, 3]);
