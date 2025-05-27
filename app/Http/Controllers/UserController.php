@@ -108,4 +108,11 @@ class UserController extends Controller
         }
         return response()->json($user);
     }
+
+    public function searchTeachers(Request $request)
+    {
+        $email = $request->email;
+        $teachers = $this->userService->findTeachersByEmail($email);
+        return response()->json(["teachers" => $teachers]);
+    }
 }
