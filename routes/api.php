@@ -26,8 +26,8 @@ Route::get('/login', function () {
     return response()->json(['message' => 'Unauthorized request'], 401);
 })->name('login');
 
-Route::get('/student/tasks', [TaskController::class, "getAllTasksByStudentId"])
-    ->middleware(['auth:api', 'role:student']);
+Route::get('/student/{id}/tasks', [TaskController::class, "getAllTasksByStudentId"])
+    ->middleware(['auth:api']);
 
 Route::get('/student/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
     ->middleware(['auth:api', 'role:student']);
