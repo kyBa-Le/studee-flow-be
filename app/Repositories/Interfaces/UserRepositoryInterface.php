@@ -22,4 +22,6 @@ interface UserRepositoryInterface
     public function findAllByRoleWithPagination(string $role, int $size): array;
 
     public function getAllStudentsByClassroomId(int $classroom_id): array;
+
+    public function findByRoleAndEmail(string $role, mixed $email);
 }

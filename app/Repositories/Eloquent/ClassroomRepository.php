@@ -13,7 +13,8 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         })->get()->toArray();
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return Classroom::all();
     }
 
@@ -28,7 +29,8 @@ class ClassroomRepository implements ClassroomRepositoryInterface
         return $old->update($newClassroom);
     }
 
-    public function delete(int $id) {
+    public function delete(int $id)
+    {
         return Classroom::where('id', $id)->delete();
     }
 
@@ -36,6 +38,29 @@ class ClassroomRepository implements ClassroomRepositoryInterface
     {
         $classroom = Classroom::find($classroom_id);
         return $classroom->teachers->toArray();
+    }
+
+    public function addTeacher(String $id, String $teacherId)
+    {
+        $classroom = Classroom::find($id);
+        $classroom->teachers()->attach($teacherId);
+    }
+
+    public function findByTeacherIdAndClassroomId($id, $teacherId)
+    {
+        $classroom = Classroom::find($id);
+        return $classroom->teachers->contains($teacherId);
+    }
+
+    public function deleteTeacher(string $id, String $teacherId)
+    {
+        $classroom = Classroom::findOrFail($id);
+        $classroom->teachers()->detach($teacherId);
+    }
+  
+    public function getClassroomByClassroomId($id)
+    {
+        return Classroom::find($id);
     }
 
 }

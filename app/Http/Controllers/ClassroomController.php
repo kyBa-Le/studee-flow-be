@@ -14,8 +14,8 @@ class ClassroomController extends Controller
     protected UpdateClassroomUseCase $updateClassroomUseCase;
 
     public function __construct(ClassroomService $classroomService,
-                                CreateClassroomUseCase $createClassroomUseCase,
-                                UpdateClassroomUseCase $updateClassroomUseCase)
+        CreateClassroomUseCase $createClassroomUseCase,
+        UpdateClassroomUseCase $updateClassroomUseCase)
     {
         $this->createClassroomUseCase = $createClassroomUseCase;
         $this->classroomService = $classroomService;
@@ -51,9 +51,24 @@ class ClassroomController extends Controller
         return response()->json(["message" => "Update classroom successful"]);
     }
 
-
     public function getTeachersByClassroomId($classroom_id) {
         $users = $this->classroomService->getTeachersByClassroomId($classroom_id);
         return response()->json($users);
+    }
+
+    public function addTeacherToClassroom(String $id, Request $request) {
+        $this->classroomService->addTeacher($id, $request->teacher_id);
+        return response()->json(["message" => "Add teacher successful"]);
+    }
+
+    public function deleteTeacherFromClassroom(String $id, String $teacher_id) {
+        $this->classroomService->deleteTeacher($id, $teacher_id);
+        return response()->json(["message" => "Delete teacher successful"]);
+    }
+  
+    public function getClassroomByClassroomId($id)
+    {
+        $classroom = $this->classroomService->getClassroomByClassroomId($id);
+        return response()->json($classroom);
     }
 }

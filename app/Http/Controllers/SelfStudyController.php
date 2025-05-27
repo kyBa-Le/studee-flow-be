@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestGetStudentActivity;
 use App\Services\SelfStudy\SelfStudyService;
 
 class SelfStudyController
@@ -12,11 +13,10 @@ class SelfStudyController
         $this->selfStudyService = $selfStudyService;
     }
 
-    public function getWeeklySelfStudyJournalOfStudent() {
-        $studentId = request()->user()->id;
+    public function getWeeklySelfStudyJournalOfStudent($id, RequestGetStudentActivity $request) {
         $weekId = request()->input('week_id');
 
-        $response = $this->selfStudyService->getSelfStudyJournalByStudentIdAndWeekId($studentId, $weekId);
+        $response = $this->selfStudyService->getSelfStudyJournalByStudentIdAndWeekId($id, $weekId);
         return response()->json($response);
     }
 

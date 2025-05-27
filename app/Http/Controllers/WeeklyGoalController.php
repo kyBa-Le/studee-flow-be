@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateWeeklyRequest;
+use App\Http\Requests\RequestGetStudentActivity;
 use App\Services\WeeklyGoal\WeeklyGoalService;
 use Illuminate\Http\Request;
 use Throwable;
@@ -23,11 +24,10 @@ class WeeklyGoalController extends Controller
         return response()->json($entity, 201);
     }
 
-    public function getWeeklyGoalsByStudentIdAndWeekId(Request $request)
+    public function getWeeklyGoalsByStudentIdAndWeekId($id, RequestGetStudentActivity $request)
     {
-        $studentId = $request->user()->id;
         $weekId = $request->get('week_id');
-        $entity = $this->service->getByStudentIdAndWeekId($studentId, $weekId);
+        $entity = $this->service->getByStudentIdAndWeekId($id, $weekId);
         return response()->json($entity, 200);
     }
 

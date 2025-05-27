@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestGetStudentActivity;
 use App\Services\InClass\InClassService;
 use Illuminate\Http\Request;
 
@@ -49,12 +50,10 @@ class InClassController extends Controller
     }
 
 
-    public function getInClassJournalByStudentId(Request $request) {
+    public function getInClassJournalByStudentId($id, RequestGetStudentActivity $request) {
        try {
-           $studentId = $request->user()->id;
            $weekId = $request->get('week_id');
-
-           $currentInClass = $this->inClassService->getInClassJournalByStudentId( $studentId, $weekId );
+           $currentInClass = $this->inClassService->getInClassJournalByStudentId( $id, $weekId );
            return response()->json($currentInClass);
        } catch (\Throwable $exception) {
            throw $exception;
