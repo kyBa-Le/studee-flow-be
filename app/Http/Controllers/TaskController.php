@@ -14,10 +14,9 @@ class TaskController extends Controller
         $this->taskService = $taskService;
     }
 
-    public function getAllTasksByStudentId (Request $request)
+    public function getAllTasksByStudentId ($studentId)
     {
-        $userId = $request->user()->id;
-        $tasks = $this->taskService->getAllTasksByStudentId($userId);
+        $tasks = $this->taskService->getAllTasksByStudentId( $studentId);
         return response()->json($tasks);
     }
 }
