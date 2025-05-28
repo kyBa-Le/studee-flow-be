@@ -101,7 +101,7 @@ Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClass
 
 Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
 
-Route::put('/student/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
+Route::put('/user/profile', [UserController::class, 'userUpdateProfile'])->middleware('auth:api');
 
 Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
 
