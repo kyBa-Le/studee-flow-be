@@ -78,7 +78,7 @@ class UserController extends Controller
         return response()->json(['message' => 'User updated successfully']);
     }
 
-    public function studentUpdateProfile(Request $request)
+    public function userUpdateProfile(Request $request)
     {
         $user = $request->user();
 
