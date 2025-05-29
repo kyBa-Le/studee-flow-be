@@ -93,6 +93,8 @@ Route::post("/classrooms/{id}/add-teacher", [ClassroomController::class, "addTea
 
 Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware(['auth:api', 'role:student']);
 
+Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
+
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
 
