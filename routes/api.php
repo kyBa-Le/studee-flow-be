@@ -55,7 +55,7 @@ Route::get("/students/{id}/self-studies", [SelfStudyController::class, "getWeekl
 
 Route::get("/students/{id}/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api']);
 
-Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
+Route::get('/students/{id}/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
 Route::get('/students/{id}/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api']);
 
@@ -68,6 +68,9 @@ Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "g
 Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
+
+Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
@@ -88,7 +91,7 @@ Route::post("/classrooms", [ClassroomController::class, "createClassroom"])->mid
 
 Route::post("/classrooms/{id}/add-teacher", [ClassroomController::class, "addTeacherToClassroom"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware(['auth:api', 'role:student']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);

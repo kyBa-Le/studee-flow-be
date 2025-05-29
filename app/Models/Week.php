@@ -10,14 +10,14 @@ class Week extends Model
     use HasFactory;
 
     protected $fillable = [
-        'classroom_id',
+        'student_id',
         'week',
         'start_date',
         'end_date'
     ];
 
-    public function classroom()
+    public function students()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsTo(User::class);
     }
 }
