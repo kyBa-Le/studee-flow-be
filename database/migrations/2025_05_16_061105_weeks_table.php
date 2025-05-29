@@ -11,13 +11,13 @@ return new class extends Migration
     {
        Schema::create('weeks', function (Blueprint $table) {
         $table->id();
-        $table->unsignedBigInteger('classroom_id');
+        $table->unsignedBigInteger('student_id');
         $table->integer('week');
         $table->date('start_date');
         $table->date('end_date');
         $table->timestamps();
 
-        $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+        $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
     });
     }
 
