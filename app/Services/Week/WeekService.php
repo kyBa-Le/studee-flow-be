@@ -3,7 +3,7 @@ namespace App\Services\Week;
 
 use App\Repositories\Interfaces\WeekRepositoryInterface;
 
-class WeekService 
+class WeekService
 {
     protected WeekRepositoryInterface $weekRepository;
 
@@ -11,9 +11,14 @@ class WeekService
     {
         $this->weekRepository = $weekRepository;
     }
-    
-    public function getAllWeeks() 
+
+    public function getAllWeeksByStudentId($studentId)
     {
-        return $this->weekRepository->getAllWeeks();
+        return $this->weekRepository->getAllWeeksByStudentId($studentId);
+    }
+
+    public function createWeek($week)
+    {
+        return $this->weekRepository->createWeek($week);
     }
 }

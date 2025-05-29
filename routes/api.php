@@ -26,8 +26,8 @@ Route::get('/login', function () {
     return response()->json(['message' => 'Unauthorized request'], 401);
 })->name('login');
 
-Route::get('/student/tasks', [TaskController::class, "getAllTasksByStudentId"])
-    ->middleware(['auth:api', 'role:student']);
+Route::get('/student/{id}/tasks', [TaskController::class, "getAllTasksByStudentId"])
+    ->middleware(['auth:api']);
 
 Route::get('/student/achievements', [AchievementController::class, "getAllAchievementsByStudentId"])
     ->middleware(['auth:api', 'role:student']);
@@ -55,7 +55,7 @@ Route::get("/students/{id}/self-studies", [SelfStudyController::class, "getWeekl
 
 Route::get("/students/{id}/in-classes", [InClassController::class, "getInClassJournalByStudentId"])->middleware(['auth:api']);
 
-Route::get('/classroom/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
+Route::get('/students/{id}/weeks', [WeekController::class, 'getAllWeeks'])->middleware(['auth:api']);
 
 Route::get('/students/{id}/weekly-goals', [WeeklyGoalController::class, 'getWeeklyGoalsByStudentIdAndWeekId'])->middleware(['auth:api']);
 
@@ -65,9 +65,12 @@ Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStud
 
 Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
+
+Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
@@ -88,7 +91,9 @@ Route::post("/classrooms", [ClassroomController::class, "createClassroom"])->mid
 
 Route::post("/classrooms/{id}/add-teacher", [ClassroomController::class, "addTeacherToClassroom"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware(['auth:api', 'role:student']);
+
+Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
@@ -101,7 +106,7 @@ Route::put('/student/in-classes/{id}', [InClassController::class, 'updateInClass
 
 Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->middleware(['auth:api', 'role:admin']);
 
-Route::put('/student/profile', [UserController::class, 'studentUpdateProfile'])->middleware('auth:api','role:student');
+Route::put('/user/profile', [UserController::class, 'userUpdateProfile'])->middleware('auth:api');
 
 Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
 
@@ -109,3 +114,5 @@ Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])-
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
 
 Route::delete("/classrooms/{id}/teachers/{teacher_id}", [ClassroomController::class, "deleteTeacherFromClassroom"])->middleware(['auth:api', 'role:admin']);
+
+Route::delete('/weekly-goals/{id}', [WeeklyGoalController::class, 'destroyWeeklyGoal']);

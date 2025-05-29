@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;    
 
 class WeeklyGoal extends Model
 {
@@ -16,4 +17,9 @@ class WeeklyGoal extends Model
         'goal',
         'is_achieved',
     ];
+
+    public function student() {
+        return $this->belongsTo(User::class, 'student_id');
+    }   
+
 }

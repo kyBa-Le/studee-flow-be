@@ -3,5 +3,7 @@ namespace App\Repositories\Interfaces;
 
 interface WeekRepositoryInterface
 {
-    public function getAllWeeks(): array;
+    public function getAllWeeksByStudentId($studentId): array;
+
+    public function createWeek($week);
 }

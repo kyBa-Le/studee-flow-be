@@ -33,13 +33,35 @@ class WeeklyGoalController extends Controller
 
     public function updateWeeklyGoal(Request $request, int $id)
     {
+
+        $data = $request->validate([
+            'goal' => 'nullable|string',
+            'is_achieved' => 'sometimes|boolean',
+        ]);
+
+        $data = array_filter($data, function ($value) {
+            return !is_null($value);
+        });
+
         try {
             $studentId = $request->user()->id;
-
-            $updated = $this->service->update($id, $request->toArray(), $studentId);
+            $updated = $this->service->update($id, $data, $studentId);
             return response()->json($updated, 200);
         } catch (Throwable $e) {
             Throw $e;
+        }
+    }
+
+    public function destroyWeeklyGoal(Request $request, int $id)
+    {
+        try {
+            $studentId = $request->user()->id;
+            $this->service->delete($id, $studentId);
+            return response()->json(null, 204);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }

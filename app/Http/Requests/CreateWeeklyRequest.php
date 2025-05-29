@@ -22,9 +22,9 @@ class CreateWeeklyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'student_id' => 'required|exists:students,id',
+            'student_id' => 'required|exists:users,id',
             'week_id' => 'required|exists:weeks,id',
-            'goal' => 'required|string|max:1000',
+            'goal' => 'nullable|string|max:1000',
             'is_achieved' => 'sometimes|boolean',
         ];
     }

@@ -16,4 +16,9 @@ class SubjectService
     {
         return $this->subjectRepository->getAllByClassroomId($id);
     }
+
+    public function createSubject($subject)
+    {
+        return $this->subjectRepository->createSubject($subject);
+    }
 }

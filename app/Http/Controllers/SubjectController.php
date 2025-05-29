@@ -19,4 +19,12 @@ class SubjectController extends Controller
         $subjects = $this->subjectService->getAllByClassroomId($id);
         return response()->json($subjects);
     }
+
+    public function createSubject(Request $request, $classroomId)
+    {
+        $subject = $request->all();
+        $subject["classroom_id"] = $classroomId;
+        $newSubject = $this->subjectService->createSubject($subject);
+        return response()->json(["message" => "Subject created", "subject" => $newSubject], 201);
+    }
 }
