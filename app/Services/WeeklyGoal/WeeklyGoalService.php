@@ -37,4 +37,15 @@ class WeeklyGoalService
         }
         return $this->weeklyGoalRepository->update($weeklyGoal, $newWeeklyGoal);
     }
+
+    public function delete(int $id, int $studentId): void
+    {
+        $weeklyGoal = $this->weeklyGoalRepository->findById($id);
+
+        if (!$weeklyGoal || $weeklyGoal->student_id != $studentId) {
+            throw new \Exception("Weekly Goal not found or unauthorized.");
+        }
+
+        $weeklyGoal->delete();
+    }
 }
