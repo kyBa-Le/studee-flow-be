@@ -95,6 +95,8 @@ Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware
 
 Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
+Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
+
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
 

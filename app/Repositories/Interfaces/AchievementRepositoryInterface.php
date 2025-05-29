@@ -8,4 +8,6 @@ interface AchievementRepositoryInterface
     public function getAll(): array;
 
     public function getAllByStudentId($id): array;
+
+    public function createAchievementByStudentId($data);
 }
