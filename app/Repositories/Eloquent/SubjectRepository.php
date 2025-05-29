@@ -11,4 +11,9 @@ class SubjectRepository implements SubjectRepositoryInterface
     {
         return Subject::where('classroom_id', $id)->get()->toArray();
     }
+
+    public function createSubject($subject)
+    {
+        return Subject::query()->create($subject);
+    }
 }

@@ -8,7 +8,7 @@ class WeekRepository implements WeekRepositoryInterface
 {
     public function getAllWeeksByStudentId($studentId): array
     {
-        return Week::all()->toArray();
+        return Week::where("student_id", $studentId)->get()->toArray();
     }
 
     public function createWeek($week)
