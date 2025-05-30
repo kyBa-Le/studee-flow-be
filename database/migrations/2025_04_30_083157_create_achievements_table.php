@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image_link')->nullable();
             $table->string('link')->nullable();
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->unsignedBigInteger('student_id');
             $table->string('semester');
             $table->string('title');

@@ -21,9 +21,18 @@ class AchievementController extends Controller
         return response()->json($achievements);
     }
 
-        public function getAchievementsByStudentId(Request $request, $id)
+    public function getAchievementsByStudentId(Request $request, $id)
     {
         $achievements = $this->achievementService->getAllAchievementsByStudentId($id);
+        return response()->json($achievements);
+    }
+
+    public function createAchievementByStudentId(Request $request)
+    {
+        $userId = $request->user()->id;
+        $data = $request->all();
+        $data["student_id"] = $userId;
+        $achievements = $this->achievementService->createAchievementByStudentId($data);
         return response()->json($achievements);
     }
 }

@@ -16,4 +16,8 @@ class AchievementService
     {
         return $this->achievementRepository->getAllByStudentId($id);
     }
+
+    public function createAchievementByStudentId($data) {
+        return $this->achievementRepository->createAchievementByStudentId($data);
+    }
 }

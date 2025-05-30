@@ -15,4 +15,8 @@ class AchievementRepository implements AchievementRepositoryInterface
     {
         return Achievement::where('student_id', $id)->get()->toArray();
     }
+
+    public function createAchievementByStudentId($data) {
+        return Achievement::create($data);
+    }
 }
