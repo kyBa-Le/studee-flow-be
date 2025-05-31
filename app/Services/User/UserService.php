@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
     protected UserRepositoryInterface $userRepository;
+    protected CreateStudentUseCase $createStudentUseCase;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, CreateStudentUseCase $createStudentUseCase)
     {
         $this->userRepository = $userRepository;
+        $this->createStudentUseCase = $createStudentUseCase;
     }
 
     public function listUsers(): array
@@ -53,13 +55,15 @@ class UserService
         DB::beginTransaction();
         try {
             foreach ($emails as $email) {
-                $user = $this->userRepository->create([
+                $student = [
                     'email' => $email,
                     'password' => $hashedPassword,
                     'student_classroom_id' => $classroom_id,
                     'full_name' => $email,
                     'role' => 'student'
-                ]);
+                ];
+                $this->createStudentUseCase->handle($student);
+
             }
             DB::commit();
             return true;
