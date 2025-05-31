@@ -3,10 +3,9 @@
 namespace App\Jobs;
 
 use App\Models\Deadline;
-use Carbon\Carbon;
+use App\Models\Week;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Log;
 
 class HandleDeadlineJob implements ShouldQueue
 {
@@ -20,7 +19,29 @@ class HandleDeadlineJob implements ShouldQueue
 
     public function handle(): void
     {
-        Log::info("Deadline handled: {$this->deadline}");
-        Log::info("Your deadline handled at: " . Carbon::now());
+        $students = $this->deadline->classroom->students;
+        foreach ($students as $student) {
+            $journal = Week::query()->where("student_id", $student->id)->where("status", "submitting")->first();
+
+            $deadlineTracking = $student->deadlineTracking;
+            if ($journal) {
+                $deadlineTracking->increment('count_on_time');
+            } else {
+                $deadlineTracking->increment('count_missing');
+            }
+
+
+            $studentProgress = $student->studentProgress;
+            $total = $studentProgress->count_on_time + $studentProgress->count_missing;
+
+            if ($total > 0) {
+                $newRate = ($deadlineTracking->count_on_time / $total) * 100;
+            } else {
+                $newRate = 0;
+            }
+
+            $studentProgress->update(["deadline_completion_rate" => $newRate]);
+            $journal->update(["status" => "submitted"]);
+        }
     }
 }
