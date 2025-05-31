@@ -72,6 +72,8 @@ Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middl
 
 Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin,teacher']);
 
+Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
+
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);

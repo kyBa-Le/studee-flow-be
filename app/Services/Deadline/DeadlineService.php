@@ -29,4 +29,9 @@ class DeadlineService
             throw $e;
         }
     }
+
+    public function getAllDeadlinesByClassroomId(int $classroomId): array
+    {
+        return $this->deadlineRepository->getAllByClassroomId($classroomId);
+    }
 }

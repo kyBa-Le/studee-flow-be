@@ -12,4 +12,9 @@ class DeadlineRepository implements DeadlineRepositoryInterface
     {
         Deadline::create($deadline);
     }
+
+    public function getAllByClassroomId(int $classroomId): array
+    {
+        return Deadline::query()->where('classroom_id', $classroomId)->get()->toArray();
+    }
 }

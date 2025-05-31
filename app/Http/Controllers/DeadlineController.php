@@ -24,4 +24,9 @@ class DeadlineController
             return response()->json(["message" => $exception->getMessage()]);
         }
     }
+
+    public function getAllDeadlinesByClassroomId(int $classroomId): array
+    {
+        return $this->deadlineService->getAllDeadlinesByClassroomId($classroomId);
+    }
 }
