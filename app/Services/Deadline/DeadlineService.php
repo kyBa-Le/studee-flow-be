@@ -2,6 +2,7 @@
 
 namespace App\Services\Deadline;
 
+use App\Jobs\HandleDeadlineJob;
 use App\Repositories\Interfaces\DeadlineRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,11 @@ class DeadlineService
         try {
             foreach ($deadlines as $deadline) {
                 $deadline["classroom_id"] = $classroomId;
-                $this->deadlineRepository->create($deadline);
+                $createdDeadline = $this->deadlineRepository->create($deadline);
+                if ($createdDeadline) {
+                    $delay = DeadlineTimeService::getTheEndedTime($createdDeadline);
+                    HandleDeadlineJob::dispatch($createdDeadline)->delay($delay);
+                }
             }
             DB::commit();
         } catch (\Throwable $e)

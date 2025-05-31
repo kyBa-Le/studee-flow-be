@@ -8,9 +8,9 @@ use App\Repositories\Interfaces\DeadlineRepositoryInterface;
 class DeadlineRepository implements DeadlineRepositoryInterface
 {
 
-    public function create(array $deadline): void
+    public function create(array $deadline): Deadline
     {
-        Deadline::create($deadline);
+        return Deadline::create($deadline);
     }
 
     public function getAllByClassroomId(int $classroomId): array
