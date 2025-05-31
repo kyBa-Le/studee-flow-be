@@ -7,6 +7,7 @@ use App\Models\InClass;
 use App\Models\SemesterGoal;
 use App\Repositories\Eloquent\AchievementRepository;
 use App\Repositories\Eloquent\ClassroomRepository;
+use App\Repositories\Eloquent\DeadlineRepository;
 use App\Repositories\Eloquent\SelfStudyRepository;
 use App\Repositories\Eloquent\InClassRepository;
 use App\Repositories\Eloquent\SemesterGoalRepository;
@@ -19,6 +20,7 @@ use App\Repositories\Eloquent\WeekRepository;
 use App\Repositories\Eloquent\StudentProgressRepository;
 use App\Repositories\Interfaces\AchievementRepositoryInterface;
 use App\Repositories\Interfaces\ClassroomRepositoryInterface;
+use App\Repositories\Interfaces\DeadlineRepositoryInterface;
 use App\Repositories\Interfaces\SelfStudyRepositoryInterface;
 use App\Repositories\Interfaces\InClassRepositoryInterface;
 use App\Repositories\Interfaces\SemesterGoalRepositoryInterface;
@@ -50,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         app()->bind(InClassRepositoryInterface::class, InClassRepository::class);
         app()->bind(StudentProgressRepositoryInterface::class, StudentProgressRepository::class);
         app()->bind(WeekRepositoryInterface::class, WeekRepository::class);
+        app()->bind(DeadlineRepositoryInterface::class, DeadlineRepository::class);
     }
 
     /**
