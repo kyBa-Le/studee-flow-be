@@ -8,6 +8,7 @@ use App\Http\Controllers\InClassController;
 use App\Http\Controllers\SelfStudyController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SemesterGoalController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StudentProgressController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TaskController;
@@ -74,6 +75,9 @@ Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClass
 
 Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
 
+Route::get('/notifications', [NotificationController::class, "getUserNotifications"])->middleware(['auth:api']);
+
+Route::post('/notifications/{notificationId}/read', [NotificationController::class, "markAsRead"])->middleware(['auth:api']);
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);

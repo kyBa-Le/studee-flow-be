@@ -8,6 +8,7 @@ use App\Repositories\Eloquent\DeadlineRepository;
 use App\Repositories\Eloquent\DeadlineTrackingRepository;
 use App\Repositories\Eloquent\SelfStudyRepository;
 use App\Repositories\Eloquent\InClassRepository;
+use App\Repositories\Eloquent\NotificationRepository;
 use App\Repositories\Eloquent\SemesterGoalRepository;
 use App\Repositories\Eloquent\TaskRepository;
 use App\Repositories\Eloquent\UserRepository;
@@ -22,6 +23,7 @@ use App\Repositories\Interfaces\DeadlineRepositoryInterface;
 use App\Repositories\Interfaces\DeadlineTrackingRepositoryInterface;
 use App\Repositories\Interfaces\SelfStudyRepositoryInterface;
 use App\Repositories\Interfaces\InClassRepositoryInterface;
+use App\Repositories\Interfaces\NotificationRepositoryInterface;
 use App\Repositories\Interfaces\SemesterGoalRepositoryInterface;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
@@ -51,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         app()->bind(InClassRepositoryInterface::class, InClassRepository::class);
         app()->bind(StudentProgressRepositoryInterface::class, StudentProgressRepository::class);
         app()->bind(WeekRepositoryInterface::class, WeekRepository::class);
+        app()->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         app()->bind(DeadlineRepositoryInterface::class, DeadlineRepository::class);
         app()->bind(DeadlineTrackingRepositoryInterface::class, DeadlineTrackingRepository::class);
     }
