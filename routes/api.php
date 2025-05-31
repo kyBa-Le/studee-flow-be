@@ -98,7 +98,7 @@ Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware
 
 Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
-Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::class, "createDeadlinesInBulk"])->middleware("auth:api, role:teacher");
+Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::class, "createDeadlinesInBulk"])->middleware(["auth:api, role:teacher"]);
 
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
 

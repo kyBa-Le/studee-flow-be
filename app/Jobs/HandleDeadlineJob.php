@@ -26,6 +26,7 @@ class HandleDeadlineJob implements ShouldQueue
             $deadlineTracking = $student->deadlineTracking;
             if ($journal) {
                 $deadlineTracking->increment('count_on_time');
+                $journal->update(["status" => "submitted"]);
             } else {
                 $deadlineTracking->increment('count_missing');
             }
@@ -41,7 +42,6 @@ class HandleDeadlineJob implements ShouldQueue
             }
 
             $studentProgress->update(["deadline_completion_rate" => $newRate]);
-            $journal->update(["status" => "submitted"]);
         }
     }
 }
