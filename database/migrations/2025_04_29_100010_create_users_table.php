@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("role");
             $table->string("gender")->nullable();
             $table->unsignedBigInteger("student_classroom_id")->nullable();
+            $table->text("fcm_token")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

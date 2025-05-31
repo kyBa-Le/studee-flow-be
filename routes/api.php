@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\DeadlineController;
-use App\Http\Controllers\SelfStudyController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
-use App\Http\Controllers\SemesterGoalController;
-use App\Http\Controllers\SemesterController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\WeeklyGoalController;
+use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\InClassController;
+use App\Http\Controllers\SelfStudyController;
+use App\Http\Controllers\SemesterController;
+use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\StudentProgressController;
-use App\Models\InClass;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeekController;
+use App\Http\Controllers\WeeklyGoalController;
+use app\ThirdPartyService\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -102,6 +102,7 @@ Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::cla
 
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
 
+Route::post("/users/notification-token", [NotificationService::class, "storeFCMToken"])->middleware(['auth:api']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
