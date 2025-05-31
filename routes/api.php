@@ -16,6 +16,7 @@ use App\Models\InClass;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 // GET
 Route::get('/user', function (Request $request) {
@@ -71,6 +72,10 @@ Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middl
 
 Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
+Route::get('/comment/{id}', [CommentController::class, 'getCommentById'])->middleware(['auth:api']);
+
+Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCommentsByReceiverId'])->middleware(['auth:api']);
+
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
@@ -96,6 +101,8 @@ Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware
 Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
+
+Route::post('/comment', [CommentController::class, "create"])->middleware(['auth:api']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
