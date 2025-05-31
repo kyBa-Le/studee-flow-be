@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\SelfStudyController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
@@ -70,7 +71,9 @@ Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"
 
 Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin,teacher']);
+
+Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
 
 Route::get('/comment/{id}', [CommentController::class, 'getCommentById'])->middleware(['auth:api']);
 
@@ -100,6 +103,8 @@ Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware
 
 Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
+Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::class, "createDeadlinesInBulk"])->middleware(["auth:api, role:teacher"]);
+
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
 
 Route::post('/comment', [CommentController::class, "create"])->middleware(['auth:api']);
@@ -118,6 +123,8 @@ Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->m
 Route::put('/user/profile', [UserController::class, 'userUpdateProfile'])->middleware('auth:api');
 
 Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
+
+Route::put("/student/weeks/{id}", [WeekController::class, "updateWeek"])->middleware(['auth:api', 'role:student']);
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);

@@ -15,6 +15,7 @@ return new class extends Migration
         $table->integer('week');
         $table->date('start_date');
         $table->date('end_date');
+        $table->string('status')->default('created');
         $table->timestamps();
 
         $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');

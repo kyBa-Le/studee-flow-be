@@ -1,10 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Week;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,7 +24,9 @@ class DatabaseSeeder extends Seeder
             StudentProgressSeeder::class,
             WeeklyGoalSeeder::class,
             SelfStudySeeder::class,
-            CommentSeeder::class
+            CommentSeeder::class,
+            DeadlineSeeder::class,
+            DeadlineTrackingSeeder::class,
         ]);
     }
 }

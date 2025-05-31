@@ -34,4 +34,14 @@ class WeekController extends Controller
             return response()->json($exception->getMessage(), 400);
         }
     }
+
+    public function updateWeek(Request $request, $id) 
+    {
+        $userId = $request->user()->id;
+        $data = $request->all();
+        $weekId = $id;
+        $data["student_id"] = $userId;
+        $week = $this->weekService->updateWeek($weekId, $data);
+        return response()->json($week);
+    }
 }
