@@ -69,7 +69,7 @@ Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"
 
 Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin,teacher']);
 
 
 // POST

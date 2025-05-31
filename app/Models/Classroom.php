@@ -23,4 +23,9 @@ class Classroom extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    public function deadlines()
+    {
+        return $this->hasMany(Deadline::class);
+    }
 }

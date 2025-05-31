@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             InClassSeeder::class,
             StudentProgressSeeder::class,
             WeeklyGoalSeeder::class,
-            SelfStudySeeder::class
+            SelfStudySeeder::class,
+            DeadlineSeeder::class,
         ]);
     }
 }
