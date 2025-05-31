@@ -118,6 +118,8 @@ Route::put('/user/profile', [UserController::class, 'userUpdateProfile'])->middl
 
 Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
 
+Route::put("/student/weeks/{id}", [WeekController::class, "updateWeek"])->middleware(['auth:api', 'role:student']);
+
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);
 

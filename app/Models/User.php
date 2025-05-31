@@ -93,6 +93,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Week::class, 'student_id');
     }
 
+    public function weeklyGoals()
+    {
+        return $this->hasMany(WeeklyGoal::class,'student_id');
+    }
+
     public function deadlineTracking()
     {
         return $this->hasOne(DeadlineTracking::class, 'student_id');

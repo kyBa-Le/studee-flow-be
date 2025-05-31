@@ -3,15 +3,18 @@ namespace App\Services\WeeklyGoal;
 
 use App\Models\WeeklyGoal;
 use App\Repositories\Interfaces\WeeklyGoalRepositoryInterface;
+use App\Services\StudentProgress\StudentProgressService;
 use PHPUnit\Framework\Exception;
 
 class WeeklyGoalService
 {
     protected WeeklyGoalRepositoryInterface $weeklyGoalRepository;
+    private StudentProgressService $studentProgressService;
 
-    public function __construct(WeeklyGoalRepositoryInterface $weeklyGoalRepository)
+    public function __construct(WeeklyGoalRepositoryInterface $weeklyGoalRepository, StudentProgressService $studentProgressService)
     {
         $this->weeklyGoalRepository = $weeklyGoalRepository;
+        $this->studentProgressService = $studentProgressService;
     }
 
     public function create(array $data)
@@ -35,7 +38,10 @@ class WeeklyGoalService
         if (!$weeklyGoal || $weeklyGoal->student_id != $studentId) {
             throw new Exception("Weekly goal not found");
         }
-        return $this->weeklyGoalRepository->update($weeklyGoal, $newWeeklyGoal);
+
+        $updatedWeek = $this->weeklyGoalRepository->update($weeklyGoal, $newWeeklyGoal);
+        $this->studentProgressService->updateWeeklyGoalCompletionRate($updatedWeek);
+        return $updatedWeek;
     }
 
     public function delete(int $id, int $studentId): void
