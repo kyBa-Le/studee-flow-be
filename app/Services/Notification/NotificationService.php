@@ -3,7 +3,7 @@ namespace App\Services\Notification;
 
 use App\Repositories\Interfaces\NotificationRepositoryInterface;
 
-class NotificationService 
+class NotificationService
 {
     protected NotificationRepositoryInterface $notificationRepository;
 
@@ -11,8 +11,8 @@ class NotificationService
     {
         $this->notificationRepository = $notificationRepository;
     }
-    
-    public function getNotificationsByUserId($userId) 
+
+    public function getNotificationsByReceiverId($userId)
     {
         return $this->notificationRepository->getByUserId($userId);
     }

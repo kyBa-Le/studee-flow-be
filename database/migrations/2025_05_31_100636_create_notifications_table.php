@@ -12,13 +12,15 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('type'); 
+            $table->enum('type', ['deadline', 'feedback', 'reminder', "submit", "question"])->nullable();
             $table->boolean('is_read')->default(false);
-            $table->string('link')->nullable(); 
-            $table->unsignedBigInteger('user_id'); 
+            $table->string('link')->nullable();
+            $table->unsignedBigInteger('receiver_id');
+            $table->string('creator')->nullable();
+            $table->dateTime('deadline')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

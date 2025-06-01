@@ -103,4 +103,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(DeadlineTracking::class, 'student_id');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Deadline;
 
 use App\Jobs\HandleDeadlineJob;
+use App\Jobs\HandleDeadlineReminderCreatingJob;
 use App\Repositories\Interfaces\DeadlineRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -19,12 +20,15 @@ class DeadlineService
     {
         DB::beginTransaction();
         try {
+            $user = request()->user();
             foreach ($deadlines as $deadline) {
                 $deadline["classroom_id"] = $classroomId;
                 $createdDeadline = $this->deadlineRepository->create($deadline);
                 if ($createdDeadline) {
                     $delay = DeadlineTimeService::getTheEndedTime($createdDeadline);
+                    $notifyAt = DeadlineTimeService::getTheStartedTime($createdDeadline);
                     HandleDeadlineJob::dispatch($createdDeadline)->delay($delay);
+                    HandleDeadlineReminderCreatingJob::dispatch($createdDeadline, $user->full_name)->delay($notifyAt);
                 }
             }
             DB::commit();

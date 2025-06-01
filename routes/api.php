@@ -15,7 +15,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeekController;
 use App\Http\Controllers\WeeklyGoalController;
-use app\ThirdPartyService\NotificationService;
+use App\ThirdPartyService\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

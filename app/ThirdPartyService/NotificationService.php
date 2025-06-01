@@ -1,6 +1,6 @@
 <?php
 
-namespace app\ThirdPartyService;
+namespace App\ThirdPartyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Factory;
@@ -9,21 +9,20 @@ use Kreait\Firebase\Messaging\Notification;
 
 class NotificationService
 {
-    function sendFCMNotification($deviceToken, $title, $body)
+    function sendFCMNotification($deviceToken, $title, $data)
     {
+        $factory = (new Factory)->withServiceAccount(base_path(env('FIREBASE_CREDENTIALS')));
+        $messaging = $factory->createMessaging();
+
+        $message = CloudMessage::withTarget('token', $deviceToken)
+            ->withNotification(Notification::create($title, $data['content'] ?? ''))
+            ->withData($data);
 
         try {
-            $factory = (new Factory)->withServiceAccount(base_path(env('FIREBASE_CREDENTIALS')));
-            $messaging = $factory->createMessaging();
-
-            $message = CloudMessage::withTarget('token', $deviceToken)
-                ->withNotification(Notification::create($title, $body));
-
             $messaging->send($message);
-
+            Log::info("✅ Đã gửi FCM message");
         } catch (\Throwable $e) {
-            Log::error('❌ Lỗi khi gửi FCM notification: ' . $e->getMessage());
-            Log::error($e);
+            Log::error("❌ Lỗi khi gửi FCM notification: " . $e->getMessage());
         }
     }
 

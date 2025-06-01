@@ -6,9 +6,9 @@ use App\Repositories\Interfaces\NotificationRepositoryInterface;
 
 class NotificationRepository implements NotificationRepositoryInterface
 {
-    public function getByUserId($userId): array
+    public function getByUserId($receiver_id): array
     {
-        return Notification::where('user_id', $userId)
+        return Notification::where('receiver_id', $receiver_id)
             ->orderBy('created_at', 'desc')
             ->get()
             ->toArray();
