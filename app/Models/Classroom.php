@@ -23,4 +23,14 @@ class Classroom extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    public function deadlines()
+    {
+        return $this->hasMany(Deadline::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(User::class, 'student_classroom_id');
+    }
 }

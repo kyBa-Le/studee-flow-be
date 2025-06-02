@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\SelfStudyController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
@@ -19,6 +20,7 @@ use App\Models\InClass;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 // GET
 Route::get('/user', function (Request $request) {
@@ -66,13 +68,19 @@ Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsBy
 
 Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStudentProgressByStudentId'])->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middleware(['auth:api', 'role:admin']);
 
-Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin,teacher']);
+
+Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
+
+Route::get('/comments', [CommentController::class, 'getCommentByJournalId'])->middleware(['auth:api']);
+
+Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCommentsByReceiverId'])->middleware(['auth:api']);
 
 Route::get("/dashboard/teacher-per-class", [SystemVisitLogController::class, "getTeacherPerClass"])->middleware(['auth:api', 'role:admin']);
 
@@ -107,7 +115,11 @@ Route::post("/student/weeks", [WeekController::class, "createWeek"])->middleware
 
 Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "createSubject"])->middleware(['auth:api', 'role:teacher']);
 
+Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::class, "createDeadlinesInBulk"])->middleware(["auth:api, role:teacher"]);
+
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
+
+Route::post('/comments', [CommentController::class, "create"])->middleware(['auth:api']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
@@ -123,6 +135,8 @@ Route::put("/students/{id}", [UserController::class, "updateStudentByAdmin"])->m
 Route::put('/user/profile', [UserController::class, 'userUpdateProfile'])->middleware('auth:api');
 
 Route::put("/classrooms/{id}", [ClassroomController::class, "updateClassroom"])->middleware(['auth:api', 'role:admin']);
+
+Route::put("/student/weeks/{id}", [WeekController::class, "updateWeek"])->middleware(['auth:api', 'role:student']);
 
 // DELETE
 Route::delete("/users/{id}", [UserController::class, "deleteUser"])->middleware(['auth:api', 'role:admin']);

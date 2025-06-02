@@ -21,4 +21,9 @@ class WeekService
     {
         return $this->weekRepository->createWeek($week);
     }
+
+    public function updateWeek($weekId, $data) 
+    {
+        return $this->weekRepository->updateWeek($weekId, $data);
+    }
 }

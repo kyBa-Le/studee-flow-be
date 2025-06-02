@@ -15,4 +15,9 @@ class WeekRepository implements WeekRepositoryInterface
     {
         return Week::query()->create($week);
     }
+
+    public function updateWeek($weekId, $data) 
+    {
+        return Week::query()->where("id", "=", $weekId)->update($data);
+    }
 }
