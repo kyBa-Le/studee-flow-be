@@ -18,6 +18,7 @@ use App\Http\Controllers\WeeklyGoalController;
 use App\ThirdPartyService\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 // GET
 Route::get('/user', function (Request $request) {
@@ -65,7 +66,7 @@ Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsBy
 
 Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStudentProgressByStudentId'])->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api']);
 
@@ -74,6 +75,10 @@ Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middl
 Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin,teacher']);
 
 Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
+
+Route::get('/comments', [CommentController::class, 'getCommentByJournalId'])->middleware(['auth:api']);
+
+Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCommentsByReceiverId'])->middleware(['auth:api']);
 
 Route::get('/notifications', [NotificationController::class, "getUserNotifications"])->middleware(['auth:api']);
 
@@ -107,6 +112,8 @@ Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::cla
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
 
 Route::post("/users/notification-token", [NotificationService::class, "storeFCMToken"])->middleware(['auth:api']);
+
+Route::post('/comments', [CommentController::class, "create"])->middleware(['auth:api']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);
