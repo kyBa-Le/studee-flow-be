@@ -30,6 +30,8 @@ use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Repositories\Interfaces\SemesterRepositoryInterface;
 use App\Repositories\Interfaces\StudentProgressRepositoryInterface;
 use App\Repositories\Interfaces\WeekRepositoryInterface;
+use App\Repositories\Interfaces\CommentRepositoryInterface;
+use App\Repositories\Eloquent\CommentRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -51,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         app()->bind(InClassRepositoryInterface::class, InClassRepository::class);
         app()->bind(StudentProgressRepositoryInterface::class, StudentProgressRepository::class);
         app()->bind(WeekRepositoryInterface::class, WeekRepository::class);
+        app()->bind(CommentRepositoryInterface::class, CommentRepository::class);
         app()->bind(DeadlineRepositoryInterface::class, DeadlineRepository::class);
         app()->bind(DeadlineTrackingRepositoryInterface::class, DeadlineTrackingRepository::class);
     }
