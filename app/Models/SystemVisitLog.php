@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SystemVisitLog extends Model
 {
-    protected $table = 'user_visits';
+    protected $table = 'system_visit_logs';
     protected $fillable = ['user_id'];
     public $timestamps = true;
 

@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_visits', function (Blueprint $table) {
+        Schema::create('system_visit_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_visits');
+        Schema::dropIfExists('system_visit_logs');
     }
 };

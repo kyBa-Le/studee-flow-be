@@ -100,20 +100,19 @@ class SystemVisitLogController extends Controller
         ]);
     }
 
-    // Thống kê số lần truy cập theo ngày cho từng vai trò
     public function getUserVisitLogsByDateRange(Request $request)
     {
         $start = $request->input('start_date', now('Asia/Ho_Chi_Minh')->subDays(6)->toDateString());
         $end = $request->input('end_date', now('Asia/Ho_Chi_Minh')->toDateString());
 
-        $logs = DB::table('user_visits')
-            ->join('users', 'user_visits.user_id', '=', 'users.id')
+        $logs = DB::table('system_visit_logs')
+            ->join('users', 'system_visit_logs.user_id', '=', 'users.id')
             ->selectRaw("
-                DATE(CONVERT_TZ(user_visits.created_at, '+00:00', '+07:00')) as date,
+                DATE(CONVERT_TZ(system_visit_logs.created_at, '+00:00', '+07:00')) as date,
                 users.role,
                 COUNT(*) as visit_count
             ")
-            ->whereBetween('user_visits.created_at', [
+            ->whereBetween('system_visit_logs.created_at', [
                 Carbon::parse($start)->startOfDay()->timezone('UTC'),
                 Carbon::parse($end)->endOfDay()->timezone('UTC')
             ])
@@ -121,7 +120,6 @@ class SystemVisitLogController extends Controller
             ->orderBy('date')
             ->get();
 
-        // Chuẩn hóa dữ liệu cho FE: gom theo ngày
         $dates = collect();
         $result = [];
         foreach ($logs as $log) {
