@@ -3,18 +3,21 @@
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserVisitController;
+use App\Http\Controllers\SemesterGoalController;
+use App\Http\Controllers\SemesterController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\WeeklyGoalController;
 use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\InClassController;
 use App\Http\Controllers\SelfStudyController;
-use App\Http\Controllers\SemesterController;
-use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StudentProgressController;
-use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SystemVisitLogController;
 use App\Http\Controllers\WeekController;
-use App\Http\Controllers\WeeklyGoalController;
 use App\ThirdPartyService\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +86,16 @@ Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCom
 Route::get('/notifications', [NotificationController::class, "getUserNotifications"])->middleware(['auth:api']);
 
 Route::post('/notifications/{notificationId}/read', [NotificationController::class, "markAsRead"])->middleware(['auth:api']);
+
+Route::get("/dashboard/teacher-per-class", [SystemVisitLogController::class, "getTeacherPerClass"])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/total-visit-logs', [SystemVisitLogController::class, 'getTotalVisitLogs'])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/user-visit-logs-by-day', [SystemVisitLogController::class, 'getUserVisitLogsByDay'])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/user-visit-logs-by-range', [SystemVisitLogController::class, 'getUserVisitLogsByDateRange'])->middleware(['auth:api', 'role:admin']);
+
+Route::post('/user-visit-log', [SystemVisitLogController::class, 'logUserVisit'])->middleware('auth:api');
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
