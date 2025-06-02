@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Services\Comment;
+use App\Jobs\HandleCommentQuestionNotification;
+use App\Jobs\HandleDeadlineReminderCreatingJob;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
 
 class CommentService
@@ -14,7 +16,12 @@ class CommentService
 
     public function create(array $data)
     {
-        return $this->commentRepository->create($data);
+        $comment = $this->commentRepository->create($data);
+        if ($comment->receiver_id) {
+            $creator = request()->user();
+            HandleCommentQuestionNotification::dispatch($comment, $creator)->withoutDelay();
+        }
+        return $comment;
     }
 
     public function getCommentByJournalId($type, $journalId)

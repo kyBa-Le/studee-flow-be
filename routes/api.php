@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\DeadlineController;
-use App\Http\Controllers\SelfStudyController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
@@ -13,11 +10,15 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WeeklyGoalController;
+use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\InClassController;
+use App\Http\Controllers\SelfStudyController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StudentProgressController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SystemVisitLogController;
-use App\Models\InClass;
 use App\Http\Controllers\WeekController;
+use App\ThirdPartyService\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
@@ -82,6 +83,10 @@ Route::get('/comments', [CommentController::class, 'getCommentByJournalId'])->mi
 
 Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCommentsByReceiverId'])->middleware(['auth:api']);
 
+Route::get('/notifications', [NotificationController::class, "getUserNotifications"])->middleware(['auth:api']);
+
+Route::post('/notifications/{notificationId}/read', [NotificationController::class, "markAsRead"])->middleware(['auth:api']);
+
 Route::get("/dashboard/teacher-per-class", [SystemVisitLogController::class, "getTeacherPerClass"])->middleware(['auth:api', 'role:admin']);
 
 Route::get('/dashboard/total-visit-logs', [SystemVisitLogController::class, 'getTotalVisitLogs'])->middleware(['auth:api', 'role:admin']);
@@ -118,6 +123,8 @@ Route::post("/classrooms/{classroomId}/subjects", [SubjectController::class, "cr
 Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::class, "createDeadlinesInBulk"])->middleware(["auth:api, role:teacher"]);
 
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
+
+Route::post("/users/notification-token", [NotificationService::class, "storeFCMToken"])->middleware(['auth:api']);
 
 Route::post('/comments', [CommentController::class, "create"])->middleware(['auth:api']);
 

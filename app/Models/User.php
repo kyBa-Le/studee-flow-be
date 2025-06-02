@@ -29,7 +29,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'role',
         'gender',
-        'student_classroom_id'
+        'student_classroom_id',
+        'fcm_token',
     ];
 
     /**
@@ -101,5 +102,10 @@ class User extends Authenticatable implements JWTSubject
     public function deadlineTracking()
     {
         return $this->hasOne(DeadlineTracking::class, 'student_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id');
     }
 }

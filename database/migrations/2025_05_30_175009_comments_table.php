@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('commenter_id');
-            $table->unsignedBigInteger('receiver_id');
+            $table->unsignedBigInteger('receiver_id')->nullable();
             $table->text('content');
             $table->enum("field", ["difficulties", "plan", "lesson", ""]);
             $table->enum("type", ["in_class", "self_study", ""]);
