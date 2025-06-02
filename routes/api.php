@@ -13,7 +13,6 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WeeklyGoalController;
 use App\Http\Controllers\InClassController;
 use App\Http\Controllers\StudentProgressController;
-use App\Models\InClass;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -65,7 +64,7 @@ Route::get('/classroom/{id}/students', [UserController::class, 'getAllStudentsBy
 
 Route::get('/student/{id}/progress', [StudentProgressController::class, 'getStudentProgressByStudentId'])->middleware(['auth:api', 'role:teacher']);
 
-Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api', 'role:admin']);
+Route::get("/classrooms/{classroomId}/teachers", [ClassroomController::class, "getTeachersByClassroomId"])->middleware(['auth:api']);
 
 Route::get("/semesters", [SemesterController::class, "getSemestersByClassroomId"])->middleware(['auth:api']);
 
@@ -75,7 +74,7 @@ Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClass
 
 Route::get('/classrooms/{classroomId}/deadlines', [DeadlineController::class, "getAllDeadlinesByClassroomId"])->middleware("auth:api");
 
-Route::get('/comment/{id}', [CommentController::class, 'getCommentById'])->middleware(['auth:api']);
+Route::get('/comments', [CommentController::class, 'getCommentByJournalId'])->middleware(['auth:api']);
 
 Route::get('/comments/receiver/{receiverId}', [CommentController::class, 'getCommentsByReceiverId'])->middleware(['auth:api']);
 
@@ -107,7 +106,7 @@ Route::post("/classrooms/{classroomId}/deadlines/bulk", [DeadlineController::cla
 
 Route::post('/student/achievements', [AchievementController::class, "createAchievementByStudentId"])->middleware(['auth:api', 'role:student']);
 
-Route::post('/comment', [CommentController::class, "create"])->middleware(['auth:api']);
+Route::post('/comments', [CommentController::class, "create"])->middleware(['auth:api']);
 
 // PUT
 Route::put('/student/semester-goals/{id}', [SemesterGoalController::class, 'updateSemesterGoal'])->middleware(['auth:api', 'role:student']);

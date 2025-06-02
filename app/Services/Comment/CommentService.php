@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services\Comment;
 use App\Repositories\Interfaces\CommentRepositoryInterface;
@@ -17,9 +17,13 @@ class CommentService
         return $this->commentRepository->create($data);
     }
 
-    public function getCommentById($id)
+    public function getCommentByJournalId($type, $journalId)
     {
-        return $this->commentRepository->getCommentById($id);
+        $journal = "self_study_id";
+        if ($type == "in_class") {
+            $journal = "in_class_id";
+        }
+        return $this->commentRepository->getCommentByJournalId($journal, $journalId);
     }
 
     public function getCommentsByReceiverId(int $receiverId)

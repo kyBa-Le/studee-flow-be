@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             StudentProgressSeeder::class,
             WeeklyGoalSeeder::class,
             SelfStudySeeder::class,
-            CommentSeeder::class,
             DeadlineSeeder::class,
             DeadlineTrackingSeeder::class,
         ]);

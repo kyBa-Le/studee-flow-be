@@ -7,7 +7,7 @@ interface CommentRepositoryInterface
 {
     public function create(array $data);
 
-    public function getCommentById($id);
+    public function getCommentByJournalId($journal, $journalId);
 
     public function getCommentsByReceiverId(int $receiverId);
 }

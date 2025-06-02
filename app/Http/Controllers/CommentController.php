@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use GPBMetadata\Google\Api\Log;
 use Illuminate\Http\Request;
 use App\Services\Comment\CommentService;
 
@@ -18,17 +19,15 @@ class CommentController extends Controller
         try {
             $commenterId = $request->user()->id;
 
-            $request->merge(['commenter_id' => $commenterId]);
+            $comment = $request->all();
+            $comment["commenter_id"] = $commenterId;
+            \Illuminate\Support\Facades\Log::info("_______________{$comment['in_class_id']}");
 
-            $newComment = $this->commentService->create($request->only([
-                'commenter_id',
-                'receiver_id',
-                'content',
-            ]));
+            $newComment = $this->commentService->create($comment);
 
             return response()->json([
                 'message' => 'Comment created successfully!',
-                'commentId' => $newComment->id,
+                'comment' => $newComment,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -38,10 +37,12 @@ class CommentController extends Controller
         }
     }
 
-    public function getCommentById($id)
+    public function getCommentByJournalId(Request $request)
     {
         try {
-            $comment = $this->commentService->getCommentById($id);
+            $type = $request->query('type');
+            $journalId = $request->query('journal_id');
+            $comment = $this->commentService->getCommentByJournalId($type, $journalId);
             return response()->json($comment);
         } catch (\Throwable $e) {
             return response()->json([

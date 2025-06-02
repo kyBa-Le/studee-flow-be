@@ -8,12 +8,16 @@ class CommentRepository implements CommentRepositoryInterface
 {
     public function create(array $data): Comment
     {
-        return Comment::create($data);
+        $newComment = Comment::create($data);
+        $newComment->load(['commenter:id,full_name,avatar_link']);
+        return $newComment;
     }
 
-    public function getCommentById($id)
+    public function getCommentByJournalId($journalColumn, $journalId)
     {
-        return Comment::find($id);
+        return Comment::where($journalColumn, $journalId)
+            ->with(['commenter:id,full_name,avatar_link'])
+            ->get();
     }
 
     public function getCommentsByReceiverId(int $receiverId)
