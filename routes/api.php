@@ -5,6 +5,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserVisitController;
 use App\Http\Controllers\SemesterGoalController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\UserController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WeeklyGoalController;
 use App\Http\Controllers\InClassController;
 use App\Http\Controllers\StudentProgressController;
+use App\Http\Controllers\SystemVisitLogController;
 use App\Models\InClass;
 use App\Http\Controllers\WeekController;
 use Illuminate\Http\Request;
@@ -71,6 +74,15 @@ Route::get("/teachers/search", [UserController::class, "searchTeachers"])->middl
 
 Route::get("/classrooms/{id}", [ClassroomController::class, "getClassroomByClassroomId"])->middleware(['auth:api', 'role:admin']);
 
+Route::get("/dashboard/teacher-per-class", [SystemVisitLogController::class, "getTeacherPerClass"])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/total-visit-logs', [SystemVisitLogController::class, 'getTotalVisitLogs'])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/user-visit-logs-by-day', [SystemVisitLogController::class, 'getUserVisitLogsByDay'])->middleware(['auth:api', 'role:admin']);
+
+Route::get('/dashboard/user-visit-logs-by-range', [SystemVisitLogController::class, 'getUserVisitLogsByDateRange'])->middleware(['auth:api', 'role:admin']);
+
+Route::post('/user-visit-log', [SystemVisitLogController::class, 'logUserVisit'])->middleware('auth:api');
 
 // POST
 Route::post('/login', [AuthController::class, 'login']);
