@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRole;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
 
     /**
@@ -18,10 +21,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
     protected $fillable = [
-        'name',
+        'full_name',
+        'avatar_link',
         'email',
         'password',
+        'role',
+        'gender',
+        'student_classroom_id',
+        'fcm_token',
     ];
 
     /**
@@ -42,8 +51,61 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'role' => UserRole::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [
+            'role' => $this->role
+        ];
+    }
+
+    public function classrooms()
+    {
+        return $this->belongsToMany(Classroom::class, 'teachers_classrooms', 'teacher_id', 'classroom_id');
+    }
+
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class, 'student_classroom_id');
+    }
+
+    public function studentProgress()
+    {
+        return $this->hasOne(StudentProgress::class, 'student_id');
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class, 'student_id');
+    }
+
+    public function weeks()
+    {
+        return $this->hasMany(Week::class, 'student_id');
+    }
+
+    public function weeklyGoals()
+    {
+        return $this->hasMany(WeeklyGoal::class,'student_id');
+    }
+
+    public function deadlineTracking()
+    {
+        return $this->hasOne(DeadlineTracking::class, 'student_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id');
     }
 }

@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Ho_Chi_Minh'),
 
     /*
     |--------------------------------------------------------------------------
@@ -122,13 +122,5 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
-    /*
-     Register the provider for this
-     * */
-
-    'providers' => [
-        App\Providers\AppServiceProvider::class,
-    ]
 
 ];

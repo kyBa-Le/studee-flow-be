@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('full_name');
+            $table->string("avatar_link")->default("https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg");
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string("role");
+            $table->string("gender")->nullable();
+            $table->unsignedBigInteger("student_classroom_id")->nullable();
+            $table->text("fcm_token")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

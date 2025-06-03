@@ -14,4 +14,14 @@ interface UserRepositoryInterface
     public function update(User $user, array $data): bool;
 
     public function delete(User $user): bool;
+
+    public function findByEmail(string $email): ?User;
+
+    public function findAllByRole(string $role): array;
+
+    public function findAllByRoleWithPagination(string $role, int $size): array;
+
+    public function getAllStudentsByClassroomId(int $classroom_id): array;
+
+    public function findByRoleAndEmail(string $role, mixed $email);
 }

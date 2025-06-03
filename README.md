@@ -16,12 +16,12 @@ app/
 │ └── Controllers/ → Handle requests, validate input, return responses 
 │ ├── Models/ → Eloquent models 
 │ ├── Services/ → Business logic layer 
-│ └── UserService.php 
+│ |      └── UserService.php 
 │ ├── Repositories/ 
-│ ├── Interfaces/ → Contracts for repositories 
-│ │ └── UserRepositoryInterface.php 
-│ └── Eloquent/ → Concrete implementation using Eloquent 
-│ └── UserRepository.php 
+│       ├── Interfaces/ → Contracts for repositories 
+│       │         └── UserRepositoryInterface.php 
+│       └── Eloquent/ → Concrete implementation using Eloquent 
+│           └── UserRepository.php 
 │ ├── Providers/ → Laravel service providers 
 │ └── RepositoryServiceProvider.php
 

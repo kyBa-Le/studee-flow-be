@@ -30,4 +30,32 @@ class UserRepository implements UserRepositoryInterface
     {
         return $user->delete();
     }
+
+    public function findByEmail(string $email): ?User
+    {
+        return User::query()->where('email', $email)->first();
+    }
+
+    public function findAllByRole(string $role): array
+    {
+        return User::with("classroom")->where('role', $role)->get()->toArray();
+    }
+
+    public function findAllByRoleWithPagination(string $role, int $size): array
+    {
+        return User::query()->where('role', $role)->paginate($size)->toArray();
+    }
+
+    public function getAllStudentsByClassroomId(int $classroom_id): array
+    {
+        return User::where('student_classroom_id', $classroom_id)->get()->toArray();
+    }
+
+    public function findByRoleAndEmail(string $role, mixed $email) {
+        return User::query()
+            ->where('role', $role)
+            ->where('email', 'LIKE', '%' . $email . '%')
+            ->get();
+
+    }
 }
